@@ -4,7 +4,7 @@
   <title><![CDATA[简记思行]]></title>
   <link href="http://SiNZeRo.github.io/atom.xml" rel="self"/>
   <link href="http://SiNZeRo.github.io/"/>
-  <updated>2013-07-20T20:14:16+08:00</updated>
+  <updated>2013-07-20T20:42:25+08:00</updated>
   <id>http://SiNZeRo.github.io/</id>
   <author>
     <name><![CDATA[SiNZeRo]]></name>
@@ -12,6 +12,25 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[octopress-配置]]></title>
+    <link href="http://SiNZeRo.github.io/blog/2013/07/20/octopress-configuration/"/>
+    <updated>2013-07-20T20:27:00+08:00</updated>
+    <id>http://SiNZeRo.github.io/blog/2013/07/20/octopress-configuration</id>
+    <content type="html"><![CDATA[<p>教程到处都是，所以我就给一些建议吧。
+似乎这个东西的更新很快，所以我就说下我是2013/7/20配置的。这个时候的各个东西的版本如下。</p>
+
+<ol>
+<li>ruby的版本一定要装<code>1.9.3</code></li>
+<li>ruby devkit 我装的是 <a href="https://github.com/downloads/oneclick/rubyinstaller/DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe">DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe</a></li>
+<li>然后几乎按着教程走就可以了。</li>
+<li>本地的库，最好直接用Dropbox保存。免得迁入迁出什么的麻烦。</li>
+<li>修改主题的时候记得在.themes里改模板。（其实我也不确定，但是这么做不至于换主题的时候被覆盖掉）</li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[DBLP_plugin]]></title>
