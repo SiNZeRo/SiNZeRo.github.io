@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[简记思行]]></title>
+  <link href="http://SiNZeRo.github.io/atom.xml" rel="self"/>
+  <link href="http://SiNZeRo.github.io/"/>
+  <updated>2013-07-20T10:57:53+08:00</updated>
+  <id>http://SiNZeRo.github.io/</id>
+  <author>
+    <name><![CDATA[SiNZeRo]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[my first blog]]></title>
+    <link href="http://SiNZeRo.github.io/blog/2013/07/20/my-first-blog/"/>
+    <updated>2013-07-20T10:57:00+08:00</updated>
+    <id>http://SiNZeRo.github.io/blog/2013/07/20/my-first-blog</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+</feed>
