@@ -4,7 +4,7 @@
   <title><![CDATA[简记思行]]></title>
   <link href="http://SiNZeRo.github.io/atom.xml" rel="self"/>
   <link href="http://SiNZeRo.github.io/"/>
-  <updated>2013-07-20T12:13:57+08:00</updated>
+  <updated>2013-07-20T20:06:44+08:00</updated>
   <id>http://SiNZeRo.github.io/</id>
   <author>
     <name><![CDATA[SiNZeRo]]></name>
@@ -112,6 +112,20 @@
     <updated>2013-07-20T10:57:00+08:00</updated>
     <id>http://SiNZeRo.github.io/blog/2013/07/20/my-first-blog</id>
     <content type="html"><![CDATA[<p>0</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[刷Toefl(Ibt)考位程序(Demo)]]></title>
+    <link href="http://SiNZeRo.github.io/blog/2011/08/11/shua-toefl-ibt-kao-wei-cheng-xu-demo/"/>
+    <updated>2011-08-11T17:12:00+08:00</updated>
+    <id>http://SiNZeRo.github.io/blog/2011/08/11/shua-toefl-ibt-kao-wei-cheng-xu-demo</id>
+    <content type="html"><![CDATA[<p><img class="left" src="http://SiNZeRo.github.io/images/post/2013/07/p2_ibtq1.png"></p>
+
+<p>界面暂时是这个样子的，亲。
+因为要查询多个考场并且服务器有最短查询间隔 和 Cookie超市。所以写了一个简单Task Schedule去保证任务正常执行。反正各种乱搞。
+不过现在各种依赖调试信息。等真的刷到位子了。我就发布 完整的程序。
+貌似之前的 iBt刷考位程序都是不需要登陆的。现在的果断的需要登陆了。</p>
 ]]></content>
   </entry>
   
