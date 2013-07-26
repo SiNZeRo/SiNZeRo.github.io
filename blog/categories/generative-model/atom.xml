@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Generative Model | 简记·思行-SiNZeRo]]></title>
   <link href="http://SiNZeRo.github.io/blog/categories/generative-model/atom.xml" rel="self"/>
   <link href="http://SiNZeRo.github.io/"/>
-  <updated>2013-07-26T19:42:56+08:00</updated>
+  <updated>2013-07-26T20:34:21+08:00</updated>
   <id>http://SiNZeRo.github.io/</id>
   <author>
     <name><![CDATA[SiNZeRo]]></name>
@@ -35,7 +35,7 @@ and φwk directly corresponds to PLSA’s EM algorithm.
 </code></pre>
 </blockquote>
 
-<p>意思就是如果 <code>1. 不假设先验</code> 或者 <code>2. 假设 $ \alpha=\beta=1 $</code>, 那么<code>LDA</code>就是<code>PLSA</code>模型。并且，木有先验的话，就没有所谓的 <code>bayesian inference </code>和 <code>MAP</code> 的说法了。求参数$\theta, \phi$的过程就和<code>PLSA</code>的<code>EM Algorithm</code>一样的了。</p>
+<p>意思就是如果 <code>1. 不假设先验</code> 或者 2. 假设 $ \alpha=\beta=1 $ , 那么<code>LDA</code>就是<code>PLSA</code>模型。并且，木有先验的话，就没有所谓的 <code>bayesian inference </code>和 <code>MAP</code> 的说法了。求参数$\theta, \phi$的过程就和<code>PLSA</code>的<code>EM Algorithm</code>一样的了。</p>
 
 <h2 id="lda-inference">比较了计算LDA inference的方法</h2>
 

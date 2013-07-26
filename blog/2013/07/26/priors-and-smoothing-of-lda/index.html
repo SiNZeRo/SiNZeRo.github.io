@@ -29,20 +29,38 @@
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<!-- mathjax config similar to math.stackexchange -->
 
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
   
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-42739284-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
 
 </head>
 
@@ -124,7 +142,7 @@ and φwk directly corresponds to PLSA’s EM algorithm.
 </code></pre>
 </blockquote>
 
-<p>意思就是如果 <code>1. 不假设先验</code> 或者 <code>2. 假设 $ \alpha=\beta=1 $</code>, 那么<code>LDA</code>就是<code>PLSA</code>模型。并且，木有先验的话，就没有所谓的 <code>bayesian inference </code>和 <code>MAP</code> 的说法了。求参数$\theta, \phi$的过程就和<code>PLSA</code>的<code>EM Algorithm</code>一样的了。</p>
+<p>意思就是如果 <code>1. 不假设先验</code> 或者 2. 假设 $ \alpha=\beta=1 $ , 那么<code>LDA</code>就是<code>PLSA</code>模型。并且，木有先验的话，就没有所谓的 <code>bayesian inference </code>和 <code>MAP</code> 的说法了。求参数$\theta, \phi$的过程就和<code>PLSA</code>的<code>EM Algorithm</code>一样的了。</p>
 
 <h2 id="lda-inference">比较了计算LDA inference的方法</h2>
 
