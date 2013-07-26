@@ -1,0 +1,378 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Priors and Smoothing of LDA - 简记·思行-SiNZeRo</title>
+  <meta name="author" content="SiNZeRo">
+
+  
+  <meta name="description" content="1. On Smoothing and Inference for Topic Models 强烈推荐大家看这篇, 这篇讲的东西，应该可以理清很多人的疑问。 这篇里提到了PLSA和LDA的关系 Exact inference (i.e. computing the posterior over &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://SiNZeRo.github.io/blog/2013/07/26/priors-and-smoothing-of-lda">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="简记·思行-SiNZeRo" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+<style TYPE="text/css">
+code.has-jax {font: inherit; font-size: 100%; background: inherit; border: inherit;}
+</style>
+<!-- RFE: for easier MathJax install https://github.com/mathjax/MathJax/issues/339 -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'] // removed 'code' entry
+    }
+});
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script type='text/javascript' src='http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML'></script>
+<!-- CDN upload request sent in private mail to generated-toc author -->
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">简记·思行-SiNZeRo</a></h1>
+  
+    <h2>Sunshine and Imagination</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:SiNZeRo.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/topic-modeling">Topic Modeling</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Priors and Smoothing of LDA</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-26T11:53:00+08:00" pubdate data-updated="true">Jul 26<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h1 id="on-smoothing-and-inference-for-topic-models">1. On Smoothing and Inference for Topic Models</h1>
+
+<p>强烈推荐大家看这篇, 这篇讲的东西，应该可以理清很多人的疑问。</p>
+
+<h2 id="plsalda">这篇里提到了PLSA和LDA的关系</h2>
+
+<blockquote>
+
+  <pre><code>Exact inference (i.e. computing the posterior over the hidden
+variables) for this model is intractable [Blei et al.,2003], and
+so a variety of approximate algorithms have been developed. If
+we ignore α and η and treat θkj and φwk as parameters, we obtain
+the PLSA model, and maximum likelihood (ML) estimation over θkj
+and φwk directly corresponds to PLSA’s EM algorithm.
+</code></pre>
+</blockquote>
+
+<p>意思就是如果 <code>1. 不假设先验</code> 或者 <code>2. 假设 $ \alpha=\beta=1 $</code>, 那么<code>LDA</code>就是<code>PLSA</code>模型。并且，木有先验的话，就没有所谓的 <code>bayesian inference </code>和 <code>MAP</code> 的说法了。求参数$\theta, \phi$的过程就和<code>PLSA</code>的<code>EM Algorithm</code>一样的了。</p>
+
+<h2 id="lda-inference">比较了计算LDA inference的方法</h2>
+
+<ol>
+  <li>Variational Bayesian (VB)</li>
+  <li>Collapsed VB</li>
+  <li>MAP (EM Elgorithm)</li>
+  <li>CVB0</li>
+  <li>Collapsed Gibbs Sampling(CGS)</li>
+</ol>
+
+<p>文中主要着重介绍了几点</p>
+
+<ol>
+  <li>这几个方法都很依赖调参数，调参数可以手工设一个固定值，或者用<code>Minka fixed point</code>,或者<code>grid search</code></li>
+  <li>表示在适当的参数的情况下，这几个方式的求解过程是相似的。并且给出了对应参数之间的关系。比如, MAP的 <code>prior</code>要比其他的多加 + 1 (要不会负的概率)之类的。</li>
+  <li>表示认真的调了参数之后，这几个方法结果的好坏，差距没有那么大。</li>
+  <li>当然最好的还是CVB0和Collapsed Gibbs Sampling. 后者多拿出几个Sampling出来平均效果更好。</li>
+  <li>CVB0是 determinstic 的，所以收敛的比 CGS 快一些。</li>
+  <li>MAP居然是并行化的保障的</li>
+</ol>
+
+<blockquote>
+
+  <pre><code>The updates in MAP estimation can be performed
+in parallel without affecting the fixed point since
+MAP is an EM algorithm [Neal and Hinton, 1998]
+</code></pre>
+</blockquote>
+
+<!-- more -->
+
+<h1 id="rethinking-lda--why-priors-matter">2. Rethinking LDA : Why Priors Matter，</h1>
+
+<p>今天看了一篇文章叫Rethinking LDA : Why Priors Matter，主要讲 LDA里 symmetric prior 和 asymmetric prior 对结果的影响。</p>
+
+<h2 id="as-prior">最终表示 AS 这种类型的prior效果比较好。</h2>
+
+<p>此处，Symmetric prior 是$T$维的dirichlet prior全部取一直值。</p>
+
+<p>AS 是指2个参取不同类型的prior.</p>
+
+<ol>
+  <li>document specific topic distribution $\theta$ 的 prior $\alpha$ 取为 symmetric prior</li>
+  <li>topic word distribution $\phi$ 的prior $\beta$ 取为 asymmetric prior, 具体 asymmetric prior 的形式可以参考论文</li>
+</ol>
+
+<h2 id="phi-prior">$ \phi $的prior</h2>
+
+<p>最早的时候blei大叔是不给这个参数加prior，加prior的是04的年griffiths大叔。</p>
+
+<p>通过blei的 variational inference 出来的应该就是 asymmetric topic word distribution, 不懂为啥后来又给加了  symmetric prior，然后又给整成了 asymmetric prior. </p>
+
+<p>通过修改成asymmetric prior, graphical model 确实是增加了一层的节点，当然如果把这层给 marginalize 掉就成为了另外一种的prior, 就不是原先的 dirichlet 假设。</p>
+
+<p>最后作者表示实验效果好呀，实验效果好。</p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">SiNZeRo</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-26T11:53:00+08:00" pubdate data-updated="true">Jul 26<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/generative-model/'>Generative Model</a>, <a class='category' href='/blog/categories/lda/'>LDA</a>, <a class='category' href='/blog/categories/prior/'>Prior</a>, <a class='category' href='/blog/categories/smoothing/'>Smoothing</a>, <a class='category' href='/blog/categories/topic-modeling/'>Topic Modeling</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://SiNZeRo.github.io/blog/2013/07/26/priors-and-smoothing-of-lda/" data-via="" data-counturl="http://SiNZeRo.github.io/blog/2013/07/26/priors-and-smoothing-of-lda/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/07/26/latex-test/" title="Previous Post: Latex Test">&laquo; Latex Test</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Categories</h1>
+    <ul id="category-list"><li><a href='/blog/categories/code/'>Code (2)</a></li><li><a href='/blog/categories/generative-model/'>Generative Model (1)</a></li><li><a href='/blog/categories/javascript/'>Javascript (1)</a></li><li><a href='/blog/categories/latex/'>Latex (1)</a></li><li><a href='/blog/categories/lda/'>LDA (1)</a></li><li><a href='/blog/categories/notes/'>Notes (1)</a></li><li><a href='/blog/categories/prior/'>Prior (1)</a></li><li><a href='/blog/categories/research/'>Research (1)</a></li><li><a href='/blog/categories/smoothing/'>Smoothing (1)</a></li><li><a href='/blog/categories/topic-modeling/'>Topic Modeling (1)</a></li></ul>
+</section>
+<section>
+  <h1>Tag Cloud</h1>
+    <span id="tag-cloud"><a href='/blog/categories/code' style='font-size: 160.0%'>Code(2)</a> <a href='/blog/categories/generative-model' style='font-size: 130.0%'>Generative Model(1)</a> <a href='/blog/categories/javascript' style='font-size: 130.0%'>Javascript(1)</a> <a href='/blog/categories/latex' style='font-size: 130.0%'>Latex(1)</a> <a href='/blog/categories/lda' style='font-size: 130.0%'>LDA(1)</a> <a href='/blog/categories/notes' style='font-size: 130.0%'>Notes(1)</a> <a href='/blog/categories/prior' style='font-size: 130.0%'>Prior(1)</a> <a href='/blog/categories/research' style='font-size: 130.0%'>Research(1)</a> <a href='/blog/categories/smoothing' style='font-size: 130.0%'>Smoothing(1)</a> <a href='/blog/categories/topic-modeling' style='font-size: 130.0%'>Topic Modeling(1)</a> </span>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/26/priors-and-smoothing-of-lda/">Priors and Smoothing of LDA</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/26/latex-test/">Latex Test</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/20/octopress-configuration/">Octopress-配置</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/20/dblp-plugin/">DBLP_plugin</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/20/my-first-blog/">简行之始</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/SiNZeRo">@SiNZeRo</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'SiNZeRo',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+<section>
+  <h1>Recent Comments</h1>
+  <div id="dsq-recentcomments" class="dsq-widget"><script type="text/javascript" src="http://disqus.com/forums/sinzero/recent_comments_widget.js?hide_avatars=0"></script></div>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - SiNZeRo -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'sinzero';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://SiNZeRo.github.io/blog/2013/07/26/priors-and-smoothing-of-lda/';
+        var disqus_url = 'http://SiNZeRo.github.io/blog/2013/07/26/priors-and-smoothing-of-lda/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

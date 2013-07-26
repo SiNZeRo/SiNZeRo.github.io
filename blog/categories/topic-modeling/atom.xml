@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Topic Modeling | 简记·思行-SiNZeRo]]></title>
   <link href="http://SiNZeRo.github.io/blog/categories/topic-modeling/atom.xml" rel="self"/>
   <link href="http://SiNZeRo.github.io/"/>
-  <updated>2013-07-26T14:46:48+08:00</updated>
+  <updated>2013-07-26T17:30:11+08:00</updated>
   <id>http://SiNZeRo.github.io/</id>
   <author>
     <name><![CDATA[SiNZeRo]]></name>
@@ -14,10 +14,10 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Priors and Smoothing]]></title>
-    <link href="http://SiNZeRo.github.io/blog/2013/07/26/rethinking-lda-why-priors-matter/"/>
+    <title type="html"><![CDATA[Priors and Smoothing of LDA]]></title>
+    <link href="http://SiNZeRo.github.io/blog/2013/07/26/priors-and-smoothing-of-lda/"/>
     <updated>2013-07-26T11:53:00+08:00</updated>
-    <id>http://SiNZeRo.github.io/blog/2013/07/26/rethinking-lda-why-priors-matter</id>
+    <id>http://SiNZeRo.github.io/blog/2013/07/26/priors-and-smoothing-of-lda</id>
     <content type="html"><![CDATA[<h1 id="on-smoothing-and-inference-for-topic-models">1. On Smoothing and Inference for Topic Models</h1>
 
 <p>强烈推荐大家看这篇, 这篇讲的东西，应该可以理清很多人的疑问。</p>
@@ -65,6 +65,8 @@ in parallel without affecting the fixed point since
 MAP is an EM algorithm [Neal and Hinton, 1998]
 </code></pre>
 </blockquote>
+
+<!-- more -->
 
 <h1 id="rethinking-lda--why-priors-matter">2. Rethinking LDA : Why Priors Matter，</h1>
 
