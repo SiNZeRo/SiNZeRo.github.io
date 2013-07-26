@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Generative Model | 简记·思行-SiNZeRo]]></title>
+  <link href="http://SiNZeRo.github.io/blog/categories/generative-model/atom.xml" rel="self"/>
+  <link href="http://SiNZeRo.github.io/"/>
+  <updated>2013-07-26T14:46:48+08:00</updated>
+  <id>http://SiNZeRo.github.io/</id>
+  <author>
+    <name><![CDATA[SiNZeRo]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Priors and Smoothing]]></title>
+    <link href="http://SiNZeRo.github.io/blog/2013/07/26/rethinking-lda-why-priors-matter/"/>
+    <updated>2013-07-26T11:53:00+08:00</updated>
+    <id>http://SiNZeRo.github.io/blog/2013/07/26/rethinking-lda-why-priors-matter</id>
+    <content type="html"><![CDATA[<h1 id="on-smoothing-and-inference-for-topic-models">1. On Smoothing and Inference for Topic Models</h1>
+
+<p>强烈推荐大家看这篇, 这篇讲的东西，应该可以理清很多人的疑问。</p>
+
+<h2 id="plsalda">这篇里提到了PLSA和LDA的关系</h2>
+
+<blockquote>
+
+  <pre><code>Exact inference (i.e. computing the posterior over the hidden
+variables) for this model is intractable [Blei et al.,2003], and
+so a variety of approximate algorithms have been developed. If
+we ignore α and η and treat θkj and φwk as parameters, we obtain
+the PLSA model, and maximum likelihood (ML) estimation over θkj
+and φwk directly corresponds to PLSA’s EM algorithm.
+</code></pre>
+</blockquote>
+
+<p>意思就是如果 <code>1. 不假设先验</code> 或者 <code>2. 假设 $ \alpha=\beta=1 $</code>, 那么<code>LDA</code>就是<code>PLSA</code>模型。并且，木有先验的话，就没有所谓的 <code>bayesian inference </code>和 <code>MAP</code> 的说法了。求参数$\theta, \phi$的过程就和<code>PLSA</code>的<code>EM Algorithm</code>一样的了。</p>
+
+<h2 id="lda-inference">比较了计算LDA inference的方法</h2>
+
+<ol>
+  <li>Variational Bayesian (VB)</li>
+  <li>Collapsed VB</li>
+  <li>MAP (EM Elgorithm)</li>
+  <li>CVB0</li>
+  <li>Collapsed Gibbs Sampling(CGS)</li>
+</ol>
+
+<p>文中主要着重介绍了几点</p>
+
+<ol>
+  <li>这几个方法都很依赖调参数，调参数可以手工设一个固定值，或者用<code>Minka fixed point</code>,或者<code>grid search</code></li>
+  <li>表示在适当的参数的情况下，这几个方式的求解过程是相似的。并且给出了对应参数之间的关系。比如, MAP的 <code>prior</code>要比其他的多加 + 1 (要不会负的概率)之类的。</li>
+  <li>表示认真的调了参数之后，这几个方法结果的好坏，差距没有那么大。</li>
+  <li>当然最好的还是CVB0和Collapsed Gibbs Sampling. 后者多拿出几个Sampling出来平均效果更好。</li>
+  <li>CVB0是 determinstic 的，所以收敛的比 CGS 快一些。</li>
+  <li>MAP居然是并行化的保障的</li>
+</ol>
+
+<blockquote>
+
+  <pre><code>The updates in MAP estimation can be performed
+in parallel without affecting the fixed point since
+MAP is an EM algorithm [Neal and Hinton, 1998]
+</code></pre>
+</blockquote>
+
+<h1 id="rethinking-lda--why-priors-matter">2. Rethinking LDA : Why Priors Matter，</h1>
+
+<p>今天看了一篇文章叫Rethinking LDA : Why Priors Matter，主要讲 LDA里 symmetric prior 和 asymmetric prior 对结果的影响。</p>
+
+<h2 id="as-prior">最终表示 AS 这种类型的prior效果比较好。</h2>
+
+<p>此处，Symmetric prior 是$T$维的dirichlet prior全部取一直值。</p>
+
+<p>AS 是指2个参取不同类型的prior.</p>
+
+<ol>
+  <li>document specific topic distribution $\theta$ 的 prior $\alpha$ 取为 symmetric prior</li>
+  <li>topic word distribution $\phi$ 的prior $\beta$ 取为 asymmetric prior, 具体 asymmetric prior 的形式可以参考论文</li>
+</ol>
+
+<h2 id="phi-prior">$ \phi $的prior</h2>
+
+<p>最早的时候blei大叔是不给这个参数加prior，加prior的是04的年griffiths大叔。</p>
+
+<p>通过blei的 variational inference 出来的应该就是 asymmetric topic word distribution, 不懂为啥后来又给加了  symmetric prior，然后又给整成了 asymmetric prior. </p>
+
+<p>通过修改成asymmetric prior, graphical model 确实是增加了一层的节点，当然如果把这层给 marginalize 掉就成为了另外一种的prior, 就不是原先的 dirichlet 假设。</p>
+
+<p>最后作者表示实验效果好呀，实验效果好。</p>
+
+]]></content>
+  </entry>
+  
+</feed>
