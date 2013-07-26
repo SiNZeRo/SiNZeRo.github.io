@@ -9,9 +9,8 @@
   <meta name="author" content="SiNZeRo">
 
   
-  <meta name="description" content="教程到处都是，所以我就给一些建议吧。
-似乎这个东西的更新很快，所以我就说下我是2013/7/20配置的。这个时候的各个东西的版本如下。 ruby的版本一定要装1.9.3
-ruby devkit 我装的是 DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe &hellip;">
+  <meta name="description" content="Google means $10^{100}$ A Cross Product Formula % <![CDATA[ \mathbf{V}_1 \times \mathbf{V}_2 = \begin{vmatrix}
+\mathbf{i} & \mathbf{j} & \mathbf{k &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -31,6 +30,28 @@ ruby devkit 我装的是 DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe &hellip;">
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+<style TYPE="text/css">
+code.has-jax {font: inherit; font-size: 100%; background: inherit; border: inherit;}
+</style>
+<!-- RFE: for easier MathJax install https://github.com/mathjax/MathJax/issues/339 -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'] // removed 'code' entry
+    }
+});
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script type='text/javascript' src='http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML'></script>
+<!-- CDN upload request sent in private mail to generated-toc author -->
 
   
 
@@ -60,6 +81,7 @@ ruby devkit 我装的是 DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe &hellip;">
 <ul class="main-navigation">
   <li><a href="/">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/topic-modeling">Topic Modeling</a></li>
 </ul>
 
 </nav>
@@ -67,6 +89,61 @@ ruby devkit 我装的是 DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/26/latex-test/">Latex Test</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-26T11:15:00+08:00" pubdate data-updated="true">Jul 26<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/26/latex-test/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Google means $10^{100}$</p>
+
+<p>A Cross Product Formula</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+
+\mathbf{V}_1 \times \mathbf{V}_2 =  \begin{vmatrix}
+\mathbf{i} & \mathbf{j} & \mathbf{k} \\\
+\frac{\partial X}{\partial u} &  \frac{\partial Y}{\partial u} & 0 \\\
+\frac{\partial X}{\partial v} &  \frac{\partial Y}{\partial v} & 0
+\end{vmatrix}
+ %]]></script>
+
+<p>The probability of getting $k$ heads when flipping $n$ coins is</p>
+
+<script type="math/tex; mode=display">
+P(E(n,k);p) = {n \choose k} p^k (1-p)^{ n-k}
+</script>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -102,13 +179,26 @@ ruby devkit 我装的是 DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe &hellip;">
 似乎这个东西的更新很快，所以我就说下我是2013/7/20配置的。这个时候的各个东西的版本如下。</p>
 
 <ol>
-<li>ruby的版本一定要装<code>1.9.3</code></li>
-<li>ruby devkit 我装的是 <a href="https://github.com/downloads/oneclick/rubyinstaller/DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe">DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe</a></li>
-<li>然后几乎按着教程走就可以了。</li>
-<li>本地的库，最好直接用Dropbox保存。免得迁入迁出什么的麻烦。</li>
-<li>修改主题的时候记得在.themes里改模板。（其实我也不确定，但是这么做不至于换主题的时候被覆盖掉）</li>
+  <li>ruby的版本一定要装<code>1.9.3</code></li>
+  <li>ruby devkit 我装的是 <a href="https://github.com/downloads/oneclick/rubyinstaller/DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe">DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe</a></li>
+  <li>然后几乎按着教程走就可以了。</li>
+  <li>本地的库，最好直接用Dropbox保存。免得迁入迁出什么的麻烦。</li>
+  <li>修改主题的时候记得在.themes里改模板。（其实我也不确定，但是这么做不至于换主题的时候被覆盖掉）</li>
+  <li>为了避免中文问题和配置上的麻烦请使用<code>kramdown</code>替换<code>rdiscount</code></li>
 </ol>
 
+<ul>
+  <li>安装 kramdown
+<code>gem install kramdown</code></li>
+  <li>_config.yml里替换
+<code>markdown: rdiscount</code>
+为
+<code>markdown: kramdown</code></li>
+</ul>
+
+<h2 id="section">参考</h2>
+
+<p><a href="http://never.doubting.me/2013/04/18/2013-04-18-setup-octopress-on-github-step-by-step/">教程:一步步在github上建立octopress博客</a></p>
 </div>
   
   
@@ -147,89 +237,86 @@ ruby devkit 我装的是 DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe &hellip;">
 
 
   <div class="entry-content">
-
-<figure class='code'><figcaption><span>- dblp_plugin.js </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">script</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;script&quot;</span><span class="p">);</span>
-</span><span class='line'><span class="nx">script</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s2">&quot;http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js&quot;</span><span class="p">;</span>
-</span><span class='line'><span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s2">&quot;head&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">script</span><span class="p">);</span>
-</span><span class='line'><span class="nx">script</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">venue_list</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">();</span>
-</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#autocomplete_F_boxes_2_body .box_line&quot;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">t</span><span class="o">=</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.hits_number&quot;</span><span class="p">);</span>
-</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;&amp;lt;INPUT type=&#39;checkbox&#39; class=&#39;venue_check&#39;&amp;gt;&amp;lt;/input&amp;gt;&quot;</span><span class="p">).</span><span class="nx">insertAfter</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">});</span>
-</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.venue_check&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">venue_name</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">parent</span><span class="p">().</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;.completion_link&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">();</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">default_venue_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;KDD&quot;</span><span class="p">,</span> <span class="s1">&#39;WWW&#39;</span><span class="p">,</span> <span class="s1">&#39;ICDM&#39;</span><span class="p">,</span> <span class="s1">&#39;SDM&#39;</span><span class="p">,</span> <span class="s1">&#39;VLDB&#39;</span><span class="p">,</span> <span class="s1">&#39;CIKM&#39;</span><span class="p">];</span>
-</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">inArray</span><span class="p">(</span><span class="nx">venue_name</span><span class="p">,</span><span class="nx">default_venue_list</span><span class="p">)</span><span class="o">&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nx">venue_list</span><span class="p">[</span><span class="nx">venue_name</span> <span class="p">]</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>            <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;checked&#39;</span><span class="p">,</span><span class="s1">&#39;true&#39;</span><span class="p">);</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>    <span class="p">});</span>
-</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.venue_check&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">venue_name</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">parent</span><span class="p">().</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;.completion_link&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">();</span>
-</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;checked&quot;</span><span class="p">)){</span>
-</span><span class='line'>            <span class="nx">venue_list</span><span class="p">[</span><span class="nx">venue_name</span> <span class="p">]</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>        <span class="k">else</span>
-</span><span class='line'>        <span class="p">{</span>
-</span><span class='line'>            <span class="nx">venue_list</span><span class="p">[</span><span class="nx">venue_name</span> <span class="p">]</span><span class="o">=</span><span class="kc">undefined</span><span class="p">;</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#autocomplete_H_boxes_1_body table tr&quot;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;th&#39;</span><span class="p">).</span><span class="nx">size</span><span class="p">()</span><span class="o">&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span><span class="k">return</span> <span class="p">;}</span>
-</span><span class='line'>            <span class="kd">var</span> <span class="nx">match_flag</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-</span><span class='line'>            <span class="k">for</span> <span class="p">(</span><span class="nx">x</span> <span class="k">in</span> <span class="nx">venue_list</span><span class="p">){</span>
-</span><span class='line'>                <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">venue_list</span><span class="p">[</span><span class="nx">x</span><span class="p">])</span> <span class="k">continue</span><span class="p">;</span>
-</span><span class='line'>                <span class="k">if</span> <span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">text</span><span class="p">().</span><span class="nx">match</span><span class="p">(</span><span class="nx">x</span><span class="p">)){</span>
-</span><span class='line'>                    <span class="nx">match_flag</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-</span><span class='line'>                <span class="p">}</span>
-</span><span class='line'>            <span class="p">}</span>
-</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="o">!</span> <span class="nx">match_flag</span> <span class="p">)</span> <span class="p">{</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">hide</span><span class="p">();}</span><span class="k">else</span> <span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">show</span><span class="p">());</span>
-</span><span class='line'>        <span class="p">});</span>
-</span><span class='line'>    <span class="p">});</span>
-</span><span class='line'><span class="p">};</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>- dblp_plugin.js </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+</pre></td><td class="code"><pre><code class="js"><span class="line"><span class="kd">var</span> <span class="nx">script</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;script&quot;</span><span class="p">);</span>
+</span><span class="line"><span class="nx">script</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s2">&quot;http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js&quot;</span><span class="p">;</span>
+</span><span class="line"><span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s2">&quot;head&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">script</span><span class="p">);</span>
+</span><span class="line"><span class="nx">script</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class="line">    <span class="nx">venue_list</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">();</span>
+</span><span class="line">    <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#autocomplete_F_boxes_2_body .box_line&quot;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class="line">        <span class="kd">var</span> <span class="nx">t</span><span class="o">=</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.hits_number&quot;</span><span class="p">);</span>
+</span><span class="line">        <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;&amp;lt;INPUT type=&#39;checkbox&#39; class=&#39;venue_check&#39;&amp;gt;&amp;lt;/input&amp;gt;&quot;</span><span class="p">).</span><span class="nx">insertAfter</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span>
+</span><span class="line">    <span class="p">});</span>
+</span><span class="line">    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.venue_check&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class="line">        <span class="kd">var</span> <span class="nx">venue_name</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">parent</span><span class="p">().</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;.completion_link&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">();</span>
+</span><span class="line">        <span class="kd">var</span> <span class="nx">default_venue_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;KDD&quot;</span><span class="p">,</span> <span class="s1">&#39;WWW&#39;</span><span class="p">,</span> <span class="s1">&#39;ICDM&#39;</span><span class="p">,</span> <span class="s1">&#39;SDM&#39;</span><span class="p">,</span> <span class="s1">&#39;VLDB&#39;</span><span class="p">,</span> <span class="s1">&#39;CIKM&#39;</span><span class="p">];</span>
+</span><span class="line">        <span class="k">if</span> <span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">inArray</span><span class="p">(</span><span class="nx">venue_name</span><span class="p">,</span><span class="nx">default_venue_list</span><span class="p">)</span><span class="o">&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">            <span class="nx">venue_list</span><span class="p">[</span><span class="nx">venue_name</span> <span class="p">]</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+</span><span class="line">            <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;checked&#39;</span><span class="p">,</span><span class="s1">&#39;true&#39;</span><span class="p">);</span>
+</span><span class="line">        <span class="p">}</span>
+</span><span class="line">    <span class="p">});</span>
+</span><span class="line">    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.venue_check&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class="line">        <span class="kd">var</span> <span class="nx">venue_name</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">parent</span><span class="p">().</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;.completion_link&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">();</span>
+</span><span class="line">        <span class="k">if</span> <span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;checked&quot;</span><span class="p">)){</span>
+</span><span class="line">            <span class="nx">venue_list</span><span class="p">[</span><span class="nx">venue_name</span> <span class="p">]</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+</span><span class="line">        <span class="p">}</span>
+</span><span class="line">        <span class="k">else</span>
+</span><span class="line">        <span class="p">{</span>
+</span><span class="line">            <span class="nx">venue_list</span><span class="p">[</span><span class="nx">venue_name</span> <span class="p">]</span><span class="o">=</span><span class="kc">undefined</span><span class="p">;</span>
+</span><span class="line">        <span class="p">}</span>
+</span><span class="line">        <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#autocomplete_H_boxes_1_body table tr&quot;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class="line">            <span class="k">if</span> <span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;th&#39;</span><span class="p">).</span><span class="nx">size</span><span class="p">()</span><span class="o">&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span><span class="k">return</span> <span class="p">;}</span>
+</span><span class="line">            <span class="kd">var</span> <span class="nx">match_flag</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span><span class="line">            <span class="k">for</span> <span class="p">(</span><span class="nx">x</span> <span class="k">in</span> <span class="nx">venue_list</span><span class="p">){</span>
+</span><span class="line">                <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">venue_list</span><span class="p">[</span><span class="nx">x</span><span class="p">])</span> <span class="k">continue</span><span class="p">;</span>
+</span><span class="line">                <span class="k">if</span> <span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">text</span><span class="p">().</span><span class="nx">match</span><span class="p">(</span><span class="nx">x</span><span class="p">)){</span>
+</span><span class="line">                    <span class="nx">match_flag</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class="line">                <span class="p">}</span>
+</span><span class="line">            <span class="p">}</span>
+</span><span class="line">            <span class="k">if</span> <span class="p">(</span><span class="o">!</span> <span class="nx">match_flag</span> <span class="p">)</span> <span class="p">{</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">hide</span><span class="p">();}</span><span class="k">else</span> <span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">show</span><span class="p">());</span>
+</span><span class="line">        <span class="p">});</span>
+</span><span class="line">    <span class="p">});</span>
+</span><span class="line"><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 </div>
   
@@ -306,12 +393,13 @@ ruby devkit 我装的是 DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe &hellip;">
   </header>
 
 
-  <div class="entry-content"><p><img class="left" src="/images/post/2013/07/p2_ibtq1.png"></p>
+  <div class="entry-content"><p><img class="left" src="/images/post/2013/07/p2_ibtq1.png" /></p>
 
 <p>界面暂时是这个样子的，亲。
 因为要查询多个考场并且服务器有最短查询间隔 和 Cookie超市。所以写了一个简单Task Schedule去保证任务正常执行。反正各种乱搞。
 不过现在各种依赖调试信息。等真的刷到位子了。我就发布 完整的程序。
 貌似之前的 iBt刷考位程序都是不需要登陆的。现在的果断的需要登陆了。</p>
+
 </div>
   
   
@@ -329,15 +417,19 @@ ruby devkit 我装的是 DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe &hellip;">
   
     <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/code/'>Code (1)</a></li><li><a href='/blog/categories/javascript/'>Javascript (1)</a></li><li><a href='/blog/categories/research/'>Research (1)</a></li><li><a href='/blog/categories/user-guide/'>User Guide (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/code/'>Code (2)</a></li><li><a href='/blog/categories/javascript/'>Javascript (1)</a></li><li><a href='/blog/categories/latex/'>Latex (1)</a></li><li><a href='/blog/categories/notes/'>Notes (1)</a></li><li><a href='/blog/categories/research/'>Research (1)</a></li></ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/code' style='font-size: 160.0%'>Code(1)</a> <a href='/blog/categories/javascript' style='font-size: 160.0%'>Javascript(1)</a> <a href='/blog/categories/research' style='font-size: 160.0%'>Research(1)</a> <a href='/blog/categories/user-guide' style='font-size: 160.0%'>User Guide(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/code' style='font-size: 160.0%'>Code(2)</a> <a href='/blog/categories/javascript' style='font-size: 130.0%'>Javascript(1)</a> <a href='/blog/categories/latex' style='font-size: 130.0%'>Latex(1)</a> <a href='/blog/categories/notes' style='font-size: 130.0%'>Notes(1)</a> <a href='/blog/categories/research' style='font-size: 130.0%'>Research(1)</a> </span>
 </section>
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/26/latex-test/">Latex Test</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/07/20/octopress-configuration/">Octopress-配置</a>
@@ -387,7 +479,10 @@ ruby devkit 我装的是 DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe &hellip;">
   <script src="/javascripts/github.js" type="text/javascript"> </script>
 </section>
 
-
+<section>
+  <h1>Recent Comments</h1>
+  <div id="dsq-recentcomments" class="dsq-widget"><script type="text/javascript" src="http://disqus.com/forums/sinzero/recent_comments_widget.js?hide_avatars=0"></script></div>
+</section>
 
 
 

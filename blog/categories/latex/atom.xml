@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Latex | 简记·思行-SiNZeRo]]></title>
+  <link href="http://SiNZeRo.github.io/blog/categories/latex/atom.xml" rel="self"/>
+  <link href="http://SiNZeRo.github.io/"/>
+  <updated>2013-07-26T11:35:14+08:00</updated>
+  <id>http://SiNZeRo.github.io/</id>
+  <author>
+    <name><![CDATA[SiNZeRo]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Latex Test]]></title>
+    <link href="http://SiNZeRo.github.io/blog/2013/07/26/latex-test/"/>
+    <updated>2013-07-26T11:15:00+08:00</updated>
+    <id>http://SiNZeRo.github.io/blog/2013/07/26/latex-test</id>
+    <content type="html"><![CDATA[<p>Google means $10^{100}$</p>
+
+<p>A Cross Product Formula</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+
+\mathbf{V}_1 \times \mathbf{V}_2 =  \begin{vmatrix}
+\mathbf{i} & \mathbf{j} & \mathbf{k} \\\
+\frac{\partial X}{\partial u} &  \frac{\partial Y}{\partial u} & 0 \\\
+\frac{\partial X}{\partial v} &  \frac{\partial Y}{\partial v} & 0
+\end{vmatrix}
+ %]]&gt;</script>
+
+<p>The probability of getting $k$ heads when flipping $n$ coins is</p>
+
+<script type="math/tex; mode=display">
+P(E(n,k);p) = {n \choose k} p^k (1-p)^{ n-k}
+</script>
+]]></content>
+  </entry>
+  
+</feed>
