@@ -4,7 +4,7 @@
   <title><![CDATA[简记·思行-SiNZeRo]]></title>
   <link href="http://SiNZeRo.github.io/atom.xml" rel="self"/>
   <link href="http://SiNZeRo.github.io/"/>
-  <updated>2013-07-27T09:45:43+08:00</updated>
+  <updated>2013-07-27T10:21:27+08:00</updated>
   <id>http://SiNZeRo.github.io/</id>
   <author>
     <name><![CDATA[SiNZeRo]]></name>
@@ -12,6 +12,24 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[LDA and its variants]]></title>
+    <link href="http://SiNZeRo.github.io/blog/2013/07/27/lda-and-its-variants/"/>
+    <updated>2013-07-27T10:05:00+08:00</updated>
+    <id>http://SiNZeRo.github.io/blog/2013/07/27/lda-and-its-variants</id>
+    <content type="html"><![CDATA[<p>Found a post that summarized LDA and its variants:</p>
+
+<p><a href="http://hi.baidu.com/ouyanggaoyan/item/5b5c01d4c518871cd78ed0d7#713670-tsina-1-29064-128ff9f28d958dae738be418601ffbcd">Topic Model的分类总结（LDA变种）</a></p>
+
+<p>A more comprehensive bibliography is below, this page is maintained by mimno who is famous researcher in this direction.</p>
+
+<p><a href="http://www.cs.princeton.edu/~mimno/topics.html">Topic Modeling Bibliography</a></p>
+
+<p>People have different focus in this field, the first post is more likely to be written by guys who have interests in IR. In contrast, I have more interests on modeling community and STOA inference techniques. Thus, I’m going to summarize paper list according to my interest. :)</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Priors and Smoothing of LDA]]></title>
