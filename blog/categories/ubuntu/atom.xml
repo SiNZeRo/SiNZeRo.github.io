@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ubuntu | 简记·思行-SiNZeRo]]></title>
+  <link href="http://SiNZeRo.github.io/blog/categories/ubuntu/atom.xml" rel="self"/>
+  <link href="http://SiNZeRo.github.io/"/>
+  <updated>2013-07-31T20:42:27+08:00</updated>
+  <id>http://SiNZeRo.github.io/</id>
+  <author>
+    <name><![CDATA[SiNZeRo]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[ubuntu source maintained by CUHK]]></title>
+    <link href="http://SiNZeRo.github.io/blog/2013/07/31/update-ubuntu-source/"/>
+    <updated>2013-07-31T17:46:00+08:00</updated>
+    <id>http://SiNZeRo.github.io/blog/2013/07/31/update-ubuntu-source</id>
+    <content type="html"><![CDATA[<p><code>
+sudo gedit /etc/apt/sources.list
+</code>
+replace the original content with following source list</p>
+
+<p><code>
+deb http://ftp.cuhk.edu.hk/pub/Linux/ubuntu precise main restricted universe multiverse
+deb http://ftp.cuhk.edu.hk/pub/Linux/ubuntu precise-security main restricted universe multiverse
+deb http://ftp.cuhk.edu.hk/pub/Linux/ubuntu precise-updates main restricted universe multiverse
+deb http://ftp.cuhk.edu.hk/pub/Linux/ubuntu precise-backports main restricted universe multiverse
+deb http://ftp.cuhk.edu.hk/pub/Linux/ubuntu precise-proposed main restricted universe multiverse
+deb-src http://ftp.cuhk.edu.hk/pub/Linux/ubuntu precise main restricted universe multiverse
+deb-src http://ftp.cuhk.edu.hk/pub/Linux/ubuntu precise-security main restricted universe multiverse
+deb-src http://ftp.cuhk.edu.hk/pub/Linux/ubuntu precise-updates main restricted universe multiverse
+deb-src http://ftp.cuhk.edu.hk/pub/Linux/ubuntu precise-backports main restricted universe multiverse
+deb-src http://ftp.cuhk.edu.hk/pub/Linux/ubuntu precise-proposed main restricted universe
+</code></p>
+
+<p><code>
+sudo apt-get update
+</code></p>
+
+<p><code>
+sudo apt-get upgrade
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>

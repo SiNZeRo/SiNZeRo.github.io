@@ -2,58 +2,68 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://SiNZeRo.github.io/blog/2011/08/11/shua-toefl-ibt-kao-wei-cheng-xu-demo/</loc>
-        <lastmod>2013-07-30T19:27:26+08:00</lastmod>
+        <lastmod>2013-07-20T21:54:20+08:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://SiNZeRo.github.io/blog/2012/06/01/modify-files-under-the-slash-system-directory-on-android/
+        </loc>
+        <lastmod>2013-07-31T20:42:26+08:00</lastmod>
     </url>
     <url>
         <loc>http://SiNZeRo.github.io/blog/2013/07/20/my-first-blog/</loc>
-        <lastmod>2013-07-30T19:27:26+08:00</lastmod>
+        <lastmod>2013-07-20T21:54:20+08:00</lastmod>
     </url>
     <url>
         <loc>http://SiNZeRo.github.io/blog/2013/07/20/dblp-plugin/</loc>
-        <lastmod>2013-07-30T19:27:26+08:00</lastmod>
+        <lastmod>2013-07-20T22:02:16+08:00</lastmod>
     </url>
     <url>
         <loc>http://SiNZeRo.github.io/blog/2013/07/20/octopress-configuration/</loc>
-        <lastmod>2013-07-30T19:27:26+08:00</lastmod>
+        <lastmod>2013-07-26T11:12:35+08:00</lastmod>
     </url>
     <url>
         <loc>http://SiNZeRo.github.io/blog/2013/07/26/latex-test/</loc>
-        <lastmod>2013-07-30T19:27:26+08:00</lastmod>
+        <lastmod>2013-07-26T11:26:20+08:00</lastmod>
     </url>
     <url>
         <loc>http://SiNZeRo.github.io/blog/2013/07/26/priors-and-smoothing-of-lda/</loc>
-        <lastmod>2013-07-30T19:27:26+08:00</lastmod>
+        <lastmod>2013-07-26T20:34:04+08:00</lastmod>
     </url>
     <url>
         <loc>http://SiNZeRo.github.io/blog/2013/07/27/lda-and-its-variants/</loc>
-        <lastmod>2013-07-30T19:27:26+08:00</lastmod>
+        <lastmod>2013-07-27T10:21:21+08:00</lastmod>
     </url>
     <url>
-        <loc>http://SiNZeRo.github.io/404.html</loc>
-        <lastmod>2013-07-30T19:27:26+08:00</lastmod>
-    </url>
-    <url>
-        <loc>http://SiNZeRo.github.io/blog/archives/</loc>
-        <lastmod>2013-07-30T19:27:26+08:00</lastmod>
-    </url>
-    <url>
-        <loc>http://SiNZeRo.github.io/blog/categories/</loc>
-        <lastmod>2013-07-30T19:27:26+08:00</lastmod>
+        <loc>http://SiNZeRo.github.io/blog/2013/07/31/update-ubuntu-source/</loc>
+        <lastmod>2013-07-31T17:51:32+08:00</lastmod>
     </url>
     <url>
         <loc>http://SiNZeRo.github.io/humans.txt</loc>
         <lastmod>2013-07-20T12:07:15+08:00</lastmod>
     </url>
     <url>
-        <loc>http://SiNZeRo.github.io/</loc>
-        <lastmod>2013-07-30T19:27:26+08:00</lastmod>
+        <loc>http://SiNZeRo.github.io/404.html</loc>
+        <lastmod>2013-07-20T21:54:20+08:00</lastmod>
     </url>
     <url>
         <loc>http://SiNZeRo.github.io/robots.txt</loc>
-        <lastmod>2013-07-30T19:27:26+08:00</lastmod>
+        <lastmod>2013-07-20T21:54:20+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://SiNZeRo.github.io/</loc>
+        <lastmod>2013-07-31T20:42:26+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://SiNZeRo.github.io/blog/categories/</loc>
+        <lastmod>2013-07-20T21:59:48+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://SiNZeRo.github.io/blog/archives/</loc>
+        <lastmod>2013-07-31T20:42:26+08:00</lastmod>
     </url>
     <url>
         <loc>http://SiNZeRo.github.io/topic-modeling/</loc>
-        <lastmod>2013-07-30T19:27:26+08:00</lastmod>
+        <lastmod>2013-07-26T10:52:10+08:00</lastmod>
     </url>
 </urlset>

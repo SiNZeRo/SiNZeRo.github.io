@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: android | 简记·思行-SiNZeRo]]></title>
+  <link href="http://SiNZeRo.github.io/blog/categories/android/atom.xml" rel="self"/>
+  <link href="http://SiNZeRo.github.io/"/>
+  <updated>2013-07-31T20:42:27+08:00</updated>
+  <id>http://SiNZeRo.github.io/</id>
+  <author>
+    <name><![CDATA[SiNZeRo]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Modify Files Under The /System Directory on Android]]></title>
+    <link href="http://SiNZeRo.github.io/blog/2012/06/01/modify-files-under-the-slash-system-directory-on-android/"/>
+    <updated>2012-06-01T20:33:00+08:00</updated>
+    <id>http://SiNZeRo.github.io/blog/2012/06/01/modify-files-under-the-slash-system-directory-on-android</id>
+    <content type="html"><![CDATA[<p>I was trying to modify the <code>build.prop</code> file under <code>/system</code> directory. But this file is protected by system, we cannot directly edit it.
+I have tried several solutions listed below:</p>
+
+<ul>
+  <li>To utilize <code>RE(Root Explorer)</code>   to modify the permission of <code>/system</code>, however this method is failed on my G6 legend with <code>CM version android 2.3.7, modified by Devil</code>.
+2.I got some Tips from <a href="http://forum.xda-developers.com/showthread.php?t=664532&amp;page=18">http://forum.xda-developers.com/showthread.php?t=664532&amp;page=18</a>. In this post, they argued that modifying <code>/system</code> is only granted in the recovery mode.</li>
+  <li>
+    <p>So I did it in the following steps:</p>
+
+    <ol>
+      <li>Connect my phone to PC and test whether ADB is available.</li>
+      <li>Turn off the phone.</li>
+      <li>Hold on the back button and press the  turn-on button. Thus, the phone will go into the bootloader.</li>
+      <li>Enter the recovery menu, and find the advance option.         ( WARNING: if you don’t know how to enter the  recovery mode, please find related articles and read it <strong>carefully</strong>. )</li>
+      <li>Select Mount <code>/system</code> and  press on it. The option will become <code>Unmount /system</code>, which is successful result.</li>
+      <li>On PC, run command <code>adb remount</code>.  (This step maybe optional, I haven’t attempt to ignore it yet :)</li>
+      <li>And then, run <code>adb push build.prop /system/build.prop</code>.  so far, your file must has been push into <code>/system</code></li>
+      <li>Select <code>Unmount /system</code> and  press on it.  Restart yout phone to check the changes.</li>
+    </ol>
+  </li>
+</ul>
+]]></content>
+  </entry>
+  
+</feed>

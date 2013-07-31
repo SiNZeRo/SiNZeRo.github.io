@@ -4,7 +4,7 @@
   <title><![CDATA[简记·思行-SiNZeRo]]></title>
   <link href="http://SiNZeRo.github.io/atom.xml" rel="self"/>
   <link href="http://SiNZeRo.github.io/"/>
-  <updated>2013-07-30T20:02:12+08:00</updated>
+  <updated>2013-07-31T20:42:27+08:00</updated>
   <id>http://SiNZeRo.github.io/</id>
   <author>
     <name><![CDATA[SiNZeRo]]></name>
@@ -12,6 +12,44 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ubuntu source maintained by CUHK]]></title>
+    <link href="http://SiNZeRo.github.io/blog/2013/07/31/update-ubuntu-source/"/>
+    <updated>2013-07-31T17:46:00+08:00</updated>
+    <id>http://SiNZeRo.github.io/blog/2013/07/31/update-ubuntu-source</id>
+    <content type="html"><![CDATA[<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sudo gedit /etc/apt/sources.list</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>replace the original content with following source list</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">deb http://ftp.cuhk.edu.hk/pub/Linux/ubuntu precise main restricted universe multiverse
+</span><span class="line">deb http://ftp.cuhk.edu.hk/pub/Linux/ubuntu precise-security main restricted universe multiverse
+</span><span class="line">deb http://ftp.cuhk.edu.hk/pub/Linux/ubuntu precise-updates main restricted universe multiverse
+</span><span class="line">deb http://ftp.cuhk.edu.hk/pub/Linux/ubuntu precise-backports main restricted universe multiverse
+</span><span class="line">deb http://ftp.cuhk.edu.hk/pub/Linux/ubuntu precise-proposed main restricted universe multiverse
+</span><span class="line">deb-src http://ftp.cuhk.edu.hk/pub/Linux/ubuntu precise main restricted universe multiverse
+</span><span class="line">deb-src http://ftp.cuhk.edu.hk/pub/Linux/ubuntu precise-security main restricted universe multiverse
+</span><span class="line">deb-src http://ftp.cuhk.edu.hk/pub/Linux/ubuntu precise-updates main restricted universe multiverse
+</span><span class="line">deb-src http://ftp.cuhk.edu.hk/pub/Linux/ubuntu precise-backports main restricted universe multiverse
+</span><span class="line">deb-src http://ftp.cuhk.edu.hk/pub/Linux/ubuntu precise-proposed main restricted universe</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sudo apt-get update</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sudo apt-get upgrade</span></code></pre></td></tr></table></div></figure></notextile></div>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[LDA and its variants]]></title>
@@ -268,6 +306,35 @@ P(E(n,k);p) = {n \choose k} p^k (1-p)^{ n-k}
     <updated>2013-07-20T10:57:00+08:00</updated>
     <id>http://SiNZeRo.github.io/blog/2013/07/20/my-first-blog</id>
     <content type="html"><![CDATA[<p>0</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Modify Files Under The /System Directory on Android]]></title>
+    <link href="http://SiNZeRo.github.io/blog/2012/06/01/modify-files-under-the-slash-system-directory-on-android/"/>
+    <updated>2012-06-01T20:33:00+08:00</updated>
+    <id>http://SiNZeRo.github.io/blog/2012/06/01/modify-files-under-the-slash-system-directory-on-android</id>
+    <content type="html"><![CDATA[<p>I was trying to modify the <code>build.prop</code> file under <code>/system</code> directory. But this file is protected by system, we cannot directly edit it.
+I have tried several solutions listed below:</p>
+
+<ul>
+  <li>To utilize <code>RE(Root Explorer)</code>   to modify the permission of <code>/system</code>, however this method is failed on my G6 legend with <code>CM version android 2.3.7, modified by Devil</code>.
+2.I got some Tips from <a href="http://forum.xda-developers.com/showthread.php?t=664532&amp;page=18">http://forum.xda-developers.com/showthread.php?t=664532&amp;page=18</a>. In this post, they argued that modifying <code>/system</code> is only granted in the recovery mode.</li>
+  <li>
+    <p>So I did it in the following steps:</p>
+
+    <ol>
+      <li>Connect my phone to PC and test whether ADB is available.</li>
+      <li>Turn off the phone.</li>
+      <li>Hold on the back button and press the  turn-on button. Thus, the phone will go into the bootloader.</li>
+      <li>Enter the recovery menu, and find the advance option.         ( WARNING: if you don’t know how to enter the  recovery mode, please find related articles and read it <strong>carefully</strong>. )</li>
+      <li>Select Mount <code>/system</code> and  press on it. The option will become <code>Unmount /system</code>, which is successful result.</li>
+      <li>On PC, run command <code>adb remount</code>.  (This step maybe optional, I haven’t attempt to ignore it yet :)</li>
+      <li>And then, run <code>adb push build.prop /system/build.prop</code>.  so far, your file must has been push into <code>/system</code></li>
+      <li>Select <code>Unmount /system</code> and  press on it.  Restart yout phone to check the changes.</li>
+    </ol>
+  </li>
+</ul>
 ]]></content>
   </entry>
   
