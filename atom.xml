@@ -4,7 +4,7 @@
   <title><![CDATA[简记·思行-SiNZeRo]]></title>
   <link href="http://SiNZeRo.github.io/atom.xml" rel="self"/>
   <link href="http://SiNZeRo.github.io/"/>
-  <updated>2013-08-07T16:47:17+08:00</updated>
+  <updated>2013-08-07T17:10:39+08:00</updated>
   <id>http://SiNZeRo.github.io/</id>
   <author>
     <name><![CDATA[SiNZeRo]]></name>
@@ -14,26 +14,21 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Some notes of ICML13 papers]]></title>
+    <title type="html"><![CDATA[Some notes on ICML13 papers]]></title>
     <link href="http://SiNZeRo.github.io/blog/2013/08/06/modeling-musical-influence-with-topic-models/"/>
     <updated>2013-08-06T21:41:00+08:00</updated>
     <id>http://SiNZeRo.github.io/blog/2013/08/06/modeling-musical-influence-with-topic-models</id>
     <content type="html"><![CDATA[<h2 id="modeling-musical-influence-with-topic-models">modeling musical influence with topic models</h2>
 
 <blockquote>
-
-  <pre><code>2.2. The Dataset
-Conducting our study became possible with
-the publication of the Million Songs Dataset
-(Bertin-Mahieux et al., 2011) (MSD) in 2011. MSD is
+  <p>2.2. The Dataset Conducting our study became possible with the publication of the Million Songs Dataset (Bertin-Mahieux et al., 2011) (MSD) in 2011. MSD is
 the first truly large scale, diverse and epoch-spanning
 dataset of songs ever made publicly available. MSD
 includes detailed audio features for ~ 1,000,000
 songs along with rich (albeit sometimes inconsistent
 and missing) metadata including genre tags, artist
 location and artist familiarity. The audio features are
-described in Section 4.
-</code></pre>
+described in Section 4.</p>
 </blockquote>
 
 <h2 id="sequential-monte-carlo-smc-for-bayesian-decision-trees">Sequential Monte Carlo (SMC) for Bayesian decision trees</h2>
@@ -43,14 +38,12 @@ described in Section 4.
 <h2 id="mini-batch-primal-and-dual-methods-for-svms">Mini-Batch Primal and Dual Methods for SVMs</h2>
 
 <blockquote>
-
-  <pre><code>In this paper, we consider using mini-batches with
+  <p>In this paper, we consider using mini-batches with
 Pegasos (SGD on the primal objective) and with
 Stochastic Dual Coordinate Ascent (SDCA). We show
 that for both methods, the quantity that controls the
 speedup obtained using mini-batching/parallelization
-is the spectral norm of the data.
-</code></pre>
+is the spectral norm of the data.</p>
 </blockquote>
 
 <h2 id="fast-probabilistic-optimization-from-noisy-gradients">Fast Probabilistic Optimization from Noisy Gradients,</h2>
@@ -61,8 +54,7 @@ is the spectral norm of the data.
 
 <h2 id="multiple-source-cross-validation">Multiple-Source Cross Validation</h2>
 <blockquote>
-
-  <pre><code>Cross-validation is an essential tool in machine
+  <p>Cross-validation is an essential tool in machine
 learning and statistics. The typical procedure,
 in which data points are randomly
 assigned to one of the test sets, makes an implicit
@@ -80,15 +72,13 @@ variance of the cross-validation, both in the
 multiple-source setting and in the standard
 iid setting. These new estimators allow for
 much more accurate condence intervals and
-hypothesis tests to compare algorithms.
-</code></pre>
+hypothesis tests to compare algorithms.</p>
 </blockquote>
 
 <h2 id="local-low-rank-matrix-approximation">Local Low-Rank Matrix Approximation</h2>
 
 <blockquote>
-
-  <pre><code>Matrix approximation is a common tool in
+  <p>Matrix approximation is a common tool in
 recommendation systems, text mining, and
 computer vision. A prevalent assumption in
 constructing matrix approximations is that
@@ -101,14 +91,13 @@ weighted sum of low-rank matrices. We analyze
 the accuracy of the proposed local lowrank
 modeling. Our experiments show improvements
 in prediction accuracy over classical
-approaches for recommendation tasks.
-</code></pre>
+approaches for recommendation tasks.</p>
 </blockquote>
 
 <h2 id="ella-an-ecient-lifelong-learning-algorithm">ELLA: An Ecient Lifelong Learning Algorithm</h2>
-<blockquote>
 
-  <pre><code>The problem of learning multiple consecu-
+<blockquote>
+  <p>The problem of learning multiple consecu-
 tive tasks, known as lifelong learning, is of
 great importance to the creation of intelli-
 gent, general-purpose, and 
@@ -129,8 +118,7 @@ oretical performance guarantees. We show
 empirically that ELLA yields nearly identi-
 cal performance to batch multi-task learning
 while learning tasks sequentially in three or-
-ders of magnitude (over 1,000x) less time.
-</code></pre>
+ders of magnitude (over 1,000x) less time.</p>
 </blockquote>
 ]]></content>
   </entry>
