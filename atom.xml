@@ -4,7 +4,7 @@
   <title><![CDATA[简记·思行-SiNZeRo]]></title>
   <link href="http://SiNZeRo.github.io/atom.xml" rel="self"/>
   <link href="http://SiNZeRo.github.io/"/>
-  <updated>2013-08-08T14:17:10+08:00</updated>
+  <updated>2013-08-08T14:31:29+08:00</updated>
   <id>http://SiNZeRo.github.io/</id>
   <author>
     <name><![CDATA[SiNZeRo]]></name>
@@ -43,11 +43,11 @@
 <p><a href="http://www.slideshare.net/erikbern/collaborative-filtering-at-spotify-16182818">http://www.slideshare.net/erikbern/collaborative-filtering-at-spotify-16182818</a></p>
 
 <script type="math/tex; mode=display">
-log \prod p(u,i)^N_{ui} = \sum_{u,i} N_{ui} log p(u,i)
-= \sum_{u,i} N_{ui} log \sum_z p(u|z)p(i,z)
+log \prod_{(u,i) \in R} p(u,i)^{N_{ui}} = \sum_{(u,i) \in R} N_{ui} log p(u,i)
+= \sum_{(u,i) \in R} N_{ui} log \sum_z p(u|z)p(i,z)
 </script>
 
-<p>alternative definition for $p(u,i)$</p>
+<h3 id="alternative-definition-for-pui">Alternative definition for $p(u,i)$</h3>
 
 <script type="math/tex; mode=display">
 p(u,i) = exp(a^t_u b_i)/Z\\
@@ -56,11 +56,12 @@ Z= \sum_{u,i} exp(a^t_u b_i)
 
 <p>Thus, the log likelihood is:</p>
 
-<script type="math/tex; mode=display">
+<p>$$
 L= (\sum_{u,i} a_u^T b_i) - T log Z
-</script>
+$$
+The calculation of Z involves summation of all possible user item combination instead of only sweeping over observed rating. That leave the question how to efficiently estimate Z. The author didn’t mention the this approach. Maybe sampling algorithm can be incorporated to estimate this term.</p>
 
-<p>The gradient for updating $a_u$ is</p>
+<p>With the estimated Z, the gradient for updating $a_u$ is</p>
 
 <script type="math/tex; mode=display">
     \frac{\partial L}{\partial a_u} = (\sum_{i} n_{u,i} b_i) - \frac{T}{Z} (\sum_i b_i exp(a_u^T b_i))  
