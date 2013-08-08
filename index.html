@@ -114,6 +114,92 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/08/08/how-does-spotify-use-big-data/">How Does Spotify Use Big Data?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-08T12:50:00+08:00" pubdate data-updated="true">Aug 8<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/08/08/how-does-spotify-use-big-data/#disqus_thread">Comments</a>
+        
+      </p>
+    
+    <hr/>
+  </header>
+
+
+  <div class="entry-content"><p>read a answer on quora about <a href="http://www.quora.com/Spotify/How-does-Spotify-use-big-data"><code>how does Spotify use big data</code></a>   </p>
+
+<p>the following comments is posted by <a href="http://www.quora.com/Erik-Bernhardsson">Erik Bernhardsson</a>, Tech Lead at Spotify</p>
+
+<blockquote>
+  <p>We use it for a ton of things. Spotify is just in the process of upgrading to a 700 node Hadoop cluster and we probably run 2000+ jobs every day. We use it for a lot of things, including toplists, recommendations, ad forecasting, business analytics, and lots of other things. Most of the Hadoop jobs are in <code>Python</code> or <code>Hive</code>, but we also run some stuff in pure <code>Java</code>, <code>Pig</code> and <code>Scala (scalding)</code>.</p>
+</blockquote>
+
+<blockquote>
+  <p>We open sourced our workflow manager <a href="https://github.com/spotify/luigi"><code>Luigi</code></a> a while back. Here’s a presentation by me: Luigi Presentation at OSCON 2013</p>
+</blockquote>
+
+<blockquote>
+  <p>Apart from <code>Hadoop</code>, we use <code>Cassandra</code> extensively. We’re also running a test cluster with <code>Storm</code> and <code>Kafka</code> and we might start using it in production later this year.</p>
+</blockquote>
+
+<blockquote>
+  <p>Probabilistic latent semantic analysis is one method that works pretty well in the implicit context. We use it and related methods for our recommender system at Spotify.</p>
+</blockquote>
+
+<h2 id="plsa">PLSA</h2>
+
+<p><a href="http://www.slideshare.net/erikbern/collaborative-filtering-at-spotify-16182818">http://www.slideshare.net/erikbern/collaborative-filtering-at-spotify-16182818</a></p>
+
+<script type="math/tex; mode=display">
+log \prod p(u,i)^N_{ui} = \sum_{u,i} N_{ui} log p(u,i)
+= \sum_{u,i} N_{ui} log \sum_z p(u|z)p(i,z)
+</script>
+
+<p>alternative definition for $p(u,i)$</p>
+
+<script type="math/tex; mode=display">
+p(u,i) = exp(a^t_u b_i)/Z
+Z= \sum_{u,i} exp(a^t_u b_i)
+</script>
+
+<p>Thus, the log likelihood is:</p>
+
+<script type="math/tex; mode=display">
+L= (\sum_{u,i} a_u^T b_i) - T log Z
+</script>
+
+<p>The gradient for updating $a_u$ is</p>
+
+<script type="math/tex; mode=display">
+    \frac{\partial L}{\partial a_u} = (\sum_{i} n_{u,i} b_i) - \frac{T}{Z} (\sum_i b_i exp(a_u^T b_i))  
+</script>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/08/06/modeling-musical-influence-with-topic-models/">Some Notes on ICML13 Papers</a></h1>
     
     
@@ -791,52 +877,9 @@ I have tried several solutions listed below:</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/08/11/shua-toefl-ibt-kao-wei-cheng-xu-demo/">刷Toefl(Ibt)考位程序(Demo)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-08-11T17:12:00+08:00" pubdate data-updated="true">Aug 11<span>th</span>, 2011</time>
-        
-         | <a href="/blog/2011/08/11/shua-toefl-ibt-kao-wei-cheng-xu-demo/#disqus_thread">Comments</a>
-        
-      </p>
-    
-    <hr/>
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="/images/post/2013/07/p2_ibtq1.png" /></p>
-
-<p>界面暂时是这个样子的，亲。
-因为要查询多个考场并且服务器有最短查询间隔 和 Cookie超市。所以写了一个简单Task Schedule去保证任务正常执行。反正各种乱搞。
-不过现在各种依赖调试信息。等真的刷到位子了。我就发布 完整的程序。
-貌似之前的 iBt刷考位程序都是不需要登陆的。现在的果断的需要登陆了。</p>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/2/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -847,6 +890,10 @@ I have tried several solutions listed below:</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/08/08/how-does-spotify-use-big-data/">How Does Spotify Use Big Data?</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/08/06/modeling-musical-influence-with-topic-models/">Some Notes on ICML13 Papers</a>
@@ -882,10 +929,6 @@ I have tried several solutions listed below:</p>
     
       <li class="post">
         <a href="/blog/2012/06/01/modify-files-under-the-slash-system-directory-on-android/">Modify Files Under the /System Directory on Android</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2011/08/11/shua-toefl-ibt-kao-wei-cheng-xu-demo/">刷Toefl(Ibt)考位程序(Demo)</a>
       </li>
     
   </ul>

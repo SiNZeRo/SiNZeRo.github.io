@@ -4,7 +4,7 @@
   <title><![CDATA[简记·思行-SiNZeRo]]></title>
   <link href="http://SiNZeRo.github.io/atom.xml" rel="self"/>
   <link href="http://SiNZeRo.github.io/"/>
-  <updated>2013-08-08T06:57:43+08:00</updated>
+  <updated>2013-08-08T13:55:53+08:00</updated>
   <id>http://SiNZeRo.github.io/</id>
   <author>
     <name><![CDATA[SiNZeRo]]></name>
@@ -12,6 +12,62 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How does Spotify use big data?]]></title>
+    <link href="http://SiNZeRo.github.io/blog/2013/08/08/how-does-spotify-use-big-data/"/>
+    <updated>2013-08-08T12:50:00+08:00</updated>
+    <id>http://SiNZeRo.github.io/blog/2013/08/08/how-does-spotify-use-big-data</id>
+    <content type="html"><![CDATA[<p>read a answer on quora about <a href="http://www.quora.com/Spotify/How-does-Spotify-use-big-data"><code>how does Spotify use big data</code></a>   </p>
+
+<p>the following comments is posted by <a href="http://www.quora.com/Erik-Bernhardsson">Erik Bernhardsson</a>, Tech Lead at Spotify</p>
+
+<blockquote>
+  <p>We use it for a ton of things. Spotify is just in the process of upgrading to a 700 node Hadoop cluster and we probably run 2000+ jobs every day. We use it for a lot of things, including toplists, recommendations, ad forecasting, business analytics, and lots of other things. Most of the Hadoop jobs are in <code>Python</code> or <code>Hive</code>, but we also run some stuff in pure <code>Java</code>, <code>Pig</code> and <code>Scala (scalding)</code>.</p>
+</blockquote>
+
+<blockquote>
+  <p>We open sourced our workflow manager <a href="https://github.com/spotify/luigi"><code>Luigi</code></a> a while back. Here’s a presentation by me: Luigi Presentation at OSCON 2013</p>
+</blockquote>
+
+<blockquote>
+  <p>Apart from <code>Hadoop</code>, we use <code>Cassandra</code> extensively. We’re also running a test cluster with <code>Storm</code> and <code>Kafka</code> and we might start using it in production later this year.</p>
+</blockquote>
+
+<blockquote>
+  <p>Probabilistic latent semantic analysis is one method that works pretty well in the implicit context. We use it and related methods for our recommender system at Spotify.</p>
+</blockquote>
+
+<h2 id="plsa">PLSA</h2>
+
+<p><a href="http://www.slideshare.net/erikbern/collaborative-filtering-at-spotify-16182818">http://www.slideshare.net/erikbern/collaborative-filtering-at-spotify-16182818</a></p>
+
+<script type="math/tex; mode=display">
+log \prod p(u,i)^N_{ui} = \sum_{u,i} N_{ui} log p(u,i)
+= \sum_{u,i} N_{ui} log \sum_z p(u|z)p(i,z)
+</script>
+
+<p>alternative definition for $p(u,i)$</p>
+
+<script type="math/tex; mode=display">
+p(u,i) = exp(a^t_u b_i)/Z
+Z= \sum_{u,i} exp(a^t_u b_i)
+</script>
+
+<p>Thus, the log likelihood is:</p>
+
+<script type="math/tex; mode=display">
+L= (\sum_{u,i} a_u^T b_i) - T log Z
+</script>
+
+<p>The gradient for updating $a_u$ is</p>
+
+<script type="math/tex; mode=display">
+    \frac{\partial L}{\partial a_u} = (\sum_{i} n_{u,i} b_i) - \frac{T}{Z} (\sum_i b_i exp(a_u^T b_i))  
+</script>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Some notes on ICML13 papers]]></title>
