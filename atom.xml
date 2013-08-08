@@ -4,7 +4,7 @@
   <title><![CDATA[简记·思行-SiNZeRo]]></title>
   <link href="http://SiNZeRo.github.io/atom.xml" rel="self"/>
   <link href="http://SiNZeRo.github.io/"/>
-  <updated>2013-08-08T13:55:53+08:00</updated>
+  <updated>2013-08-08T14:17:10+08:00</updated>
   <id>http://SiNZeRo.github.io/</id>
   <author>
     <name><![CDATA[SiNZeRo]]></name>
@@ -50,7 +50,7 @@ log \prod p(u,i)^N_{ui} = \sum_{u,i} N_{ui} log p(u,i)
 <p>alternative definition for $p(u,i)$</p>
 
 <script type="math/tex; mode=display">
-p(u,i) = exp(a^t_u b_i)/Z
+p(u,i) = exp(a^t_u b_i)/Z\\
 Z= \sum_{u,i} exp(a^t_u b_i)
 </script>
 
