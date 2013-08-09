@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Smoothing | 简记·思行-SiNZeRo]]></title>
   <link href="http://SiNZeRo.github.io/blog/categories/smoothing/atom.xml" rel="self"/>
   <link href="http://SiNZeRo.github.io/"/>
-  <updated>2013-08-08T14:50:14+08:00</updated>
+  <updated>2013-08-09T10:59:37+08:00</updated>
   <id>http://SiNZeRo.github.io/</id>
   <author>
     <name><![CDATA[SiNZeRo]]></name>
@@ -25,14 +25,12 @@
 <h2 id="plsalda">这篇里提到了PLSA和LDA的关系</h2>
 
 <blockquote>
-
-  <pre><code>Exact inference (i.e. computing the posterior over the hidden
+  <p>Exact inference (i.e. computing the posterior over the hidden
 variables) for this model is intractable [Blei et al.,2003], and
 so a variety of approximate algorithms have been developed. If
 we ignore α and η and treat θkj and φwk as parameters, we obtain
 the PLSA model, and maximum likelihood (ML) estimation over θkj
-and φwk directly corresponds to PLSA’s EM algorithm.
-</code></pre>
+and φwk directly corresponds to PLSA’s EM algorithm.</p>
 </blockquote>
 
 <p>意思就是如果 <code>1. 不假设先验</code> 或者 2. 假设 $ \alpha=\beta=1 $ , 那么<code>LDA</code>就是<code>PLSA</code>模型。并且，木有先验的话，就没有所谓的 <code>bayesian inference </code>和 <code>MAP</code> 的说法了。求参数$\theta, \phi$的过程就和<code>PLSA</code>的<code>EM Algorithm</code>一样的了。</p>
@@ -59,11 +57,9 @@ and φwk directly corresponds to PLSA’s EM algorithm.
 </ol>
 
 <blockquote>
-
-  <pre><code>The updates in MAP estimation can be performed
+  <p>The updates in MAP estimation can be performed
 in parallel without affecting the fixed point since
-MAP is an EM algorithm [Neal and Hinton, 1998]
-</code></pre>
+MAP is an EM algorithm [Neal and Hinton, 1998]</p>
 </blockquote>
 
 <!-- more -->

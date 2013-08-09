@@ -144,14 +144,12 @@
 <h2 id="plsalda">这篇里提到了PLSA和LDA的关系</h2>
 
 <blockquote>
-
-  <pre><code>Exact inference (i.e. computing the posterior over the hidden
+  <p>Exact inference (i.e. computing the posterior over the hidden
 variables) for this model is intractable [Blei et al.,2003], and
 so a variety of approximate algorithms have been developed. If
 we ignore α and η and treat θkj and φwk as parameters, we obtain
 the PLSA model, and maximum likelihood (ML) estimation over θkj
-and φwk directly corresponds to PLSA’s EM algorithm.
-</code></pre>
+and φwk directly corresponds to PLSA’s EM algorithm.</p>
 </blockquote>
 
 <p>意思就是如果 <code>1. 不假设先验</code> 或者 2. 假设 $ \alpha=\beta=1 $ , 那么<code>LDA</code>就是<code>PLSA</code>模型。并且，木有先验的话，就没有所谓的 <code>bayesian inference </code>和 <code>MAP</code> 的说法了。求参数$\theta, \phi$的过程就和<code>PLSA</code>的<code>EM Algorithm</code>一样的了。</p>
@@ -178,11 +176,9 @@ and φwk directly corresponds to PLSA’s EM algorithm.
 </ol>
 
 <blockquote>
-
-  <pre><code>The updates in MAP estimation can be performed
+  <p>The updates in MAP estimation can be performed
 in parallel without affecting the fixed point since
-MAP is an EM algorithm [Neal and Hinton, 1998]
-</code></pre>
+MAP is an EM algorithm [Neal and Hinton, 1998]</p>
 </blockquote>
 
 <!-- more -->
@@ -324,7 +320,19 @@ MAP is an EM algorithm [Neal and Hinton, 1998]
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/android/'>android (1)</a></li><li><a href='/blog/categories/code/'>Code (2)</a></li><li><a href='/blog/categories/generative-model/'>Generative Model (1)</a></li><li><a href='/blog/categories/javascript/'>Javascript (1)</a></li><li><a href='/blog/categories/latex/'>Latex (1)</a></li><li><a href='/blog/categories/lda/'>LDA (1)</a></li><li><a href='/blog/categories/notes/'>Notes (1)</a></li><li><a href='/blog/categories/prior/'>Prior (1)</a></li><li><a href='/blog/categories/research/'>Research (1)</a></li><li><a href='/blog/categories/smoothing/'>Smoothing (1)</a></li><li><a href='/blog/categories/topic-modeling/'>Topic Modeling (1)</a></li><li><a href='/blog/categories/ubuntu/'>ubuntu (1)</a></li></ul>
+    <ul id="category-list"><li class='category'><a href='/blog/categories/code/'>Code (2)</a></li>
+<li class='category'><a href='/blog/categories/generative-model/'>Generative Model (1)</a></li>
+<li class='category'><a href='/blog/categories/javascript/'>Javascript (1)</a></li>
+<li class='category'><a href='/blog/categories/lda/'>LDA (1)</a></li>
+<li class='category'><a href='/blog/categories/latex/'>Latex (1)</a></li>
+<li class='category'><a href='/blog/categories/notes/'>Notes (1)</a></li>
+<li class='category'><a href='/blog/categories/prior/'>Prior (1)</a></li>
+<li class='category'><a href='/blog/categories/research/'>Research (1)</a></li>
+<li class='category'><a href='/blog/categories/smoothing/'>Smoothing (1)</a></li>
+<li class='category'><a href='/blog/categories/topic-modeling/'>Topic Modeling (1)</a></li>
+<li class='category'><a href='/blog/categories/android/'>android (1)</a></li>
+<li class='category'><a href='/blog/categories/ubuntu/'>ubuntu (1)</a></li>
+</ul>
 </section>
 
 <section>
