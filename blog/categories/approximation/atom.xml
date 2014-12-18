@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Approximation | 简记·思行-SiNZeRo]]></title>
   <link href="http://SiNZeRo.github.io/blog/categories/approximation/atom.xml" rel="self"/>
   <link href="http://SiNZeRo.github.io/"/>
-  <updated>2014-12-18T16:30:19+08:00</updated>
+  <updated>2014-12-18T17:25:15+08:00</updated>
   <id>http://SiNZeRo.github.io/</id>
   <author>
     <name><![CDATA[SiNZeRo]]></name>
@@ -24,7 +24,7 @@
 p(X, Z, \phi) = \prod_i p(x_i|z_i,\phi) \prod_i p(z_i;\alpha) p(\phi;\beta)
 </script>
 
-<p>one may recognize it as collapsed form of Latent Dirichlet Allocation(LDA), there omit $\alpha, \beta$ for simplicity.</p>
+<p>one may recognize it as collapsed form of Latent Dirichlet Allocation(LDA), here omits $\alpha, \beta$ for simplicity.</p>
 
 <p>Now, we want to calculate the gradient of it’s marginalized posterior <script type="math/tex">p(\phi | X)</script> 
 as following:</p>
@@ -64,15 +64,8 @@ As the full likelihood is  <script type="math/tex">p(x_i,z_i|\phi)</script>, we 
 <p>We can use MCMC method to approximate this expectation, specifically, we can construct a Markov chain to sample <script type="math/tex">z_i</script> 
 from <script type="math/tex">p(z_i | x_i, \phi)</script>, and sum over gradient based on each sample $z_i^{s}$ to calculate expectation.</p>
 
-<table>
-  <tbody>
-    <tr>
-      <td>We denote the collection of samples as ${z_i^{s}}_{s=1}^{</td>
-      <td>S</td>
-      <td>}$, the approximation is:</td>
-    </tr>
-  </tbody>
-</table>
+<p>We denote the collection of samples as <script type="math/tex">{\{z_i^{s}\}}_{s=1}^{|S|}</script>
+ , the approximation is:</p>
 
 <script type="math/tex; mode=display">% &lt;![CDATA[
 
@@ -85,14 +78,8 @@ from <script type="math/tex">p(z_i | x_i, \phi)</script>, and sum over gradient 
 
  %]]&gt;</script>
 
-<table>
-  <tbody>
-    <tr>
-      <td>In these example, the Gibbs sampler for $$p(z_i</td>
-      <td>x_i, \phi)$$ is:</td>
-    </tr>
-  </tbody>
-</table>
+<p>In these example, the Gibbs sampler for <script type="math/tex">p(z_i|x_i, \phi)</script>
+is:</p>
 
 <script type="math/tex; mode=display">% &lt;![CDATA[
 
@@ -101,6 +88,26 @@ from <script type="math/tex">p(z_i | x_i, \phi)</script>, and sum over gradient 
 \propto & (n_{dk}^{\neg ij} + \alpha) \phi_{kx_{ij}}
 \end{align}
  %]]&gt;</script>
+
+<p>Now, we consider more complex model with two set of variables that we want their gradient, un-collapsed LDA is a good example:</p>
+
+<script type="math/tex; mode=display">
+p(X, Z, \phi, \theta;\alpha, \beta) = p(\phi;\beta) \prod_i (p(x_i|z_i,\phi) p(z_i; \theta_i) p(\theta_i;\alpha))
+</script>
+
+<p>The log likelihood:</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+
+\begin{align}
+LL(\theta, \phi) &= \log p(\phi;\beta) + \sum_i \log p(x_i|\phi, \theta_i) + \sum_i \log p(\theta_i;\alpha)
+\end{align}
+ %]]&gt;</script>
+
+<p>It’s easy to see that we only need concern how to calculate the gradient of 
+<script type="math/tex">\log p(x_i|\phi, \theta_i)</script></p>
+
+<p>The approximation:</p>
 
 <p>This draft may contain some mistakes, if you found any, I will appreciate the correction. </p>
 ]]></content>
