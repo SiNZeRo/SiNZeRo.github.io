@@ -32,34 +32,31 @@
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <!-- mathjax config similar to math.stackexchange -->
 
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+MathJax.Hub.Config({
+  config: ["MMLorHTML.js"],
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX"],
+  tex2jax: {
+    inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+    displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+    processEscapes: false
+  },
+  TeX: {
+    extensions: ["AMSmath.js", "AMSsymbols.js"],
+    TagSide: "right",
+    TagIndent: ".8em",
+    MultLineWidth: "85%",
+    equationNumbers: {
+      autoNumber: "AMS",
+    },
+    unicode: {
+      fonts: "STIXGeneral,'Arial Unicode MS'"
     }
-  });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript"
-   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  },
+  showProcessingMessages: false
+});
 </script>
   
   <script type="text/javascript">
@@ -145,17 +142,18 @@ p(X, Z, \phi) = \prod_i p(x_i|z_i,\phi) \prod_i p(z_i;\alpha) p(\phi;\beta)
 
 <p>one may recognize it as collapsed form of Latent Dirichlet Allocation(LDA), here omits $\alpha, \beta$ for simplicity.</p>
 
-<p>Now, we want to calculate the gradient of it’s marginalized posterior <script type="math/tex">p(\phi | X)</script> 
+<p>Now, we want to calculate the gradient of it’s marginalized posterior $p(\phi|X)$
 as following:</p>
 
-<script type="math/tex; mode=display">
-\frac{\partial \log p(\phi | X)}{\partial \phi}
-= \frac{\partial}{\partial \phi} [\sum_i \log  p(x_i | \phi) + \log p(\phi)- \log p(X)] \\
-= \sum_i  {\frac{\partial}{\partial \phi} \log p(x_i | \phi)} + \frac{\partial \log p(\phi)}{\partial \phi}
-</script>
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+ &\frac{\partial \log p(\phi | X)}{\partial \phi} \\
+= &\frac{\partial}{\partial \phi} [\sum_i \log  p(x_i | \phi) + \log p(\phi)- \log p(X)] \\
+= &\sum_i  {\frac{\partial}{\partial \phi} \log p(x_i | \phi)} + \frac{\partial \log p(\phi)}{\partial \phi}
+\end{align} %]]></script>
 
-<p>The second is just gradient of prior distribution of <script type="math/tex">\phi</script>, first term is incomplete log likelihood, We can not calculate it directly.
-As the full likelihood is  <script type="math/tex">p(x_i,z_i|\phi)</script>, we calculate it as following:</p>
+<p>The second is just gradient of prior distribution of $\phi$, first term is incomplete log likelihood, We can not calculate it directly.
+As the full likelihood is  $p(x_i,z_i|\phi)$, we calculate it as following:</p>
 
 <script type="math/tex; mode=display">
 \frac{\partial}{\partial \phi} \log p(x | \phi) \\ 
@@ -180,10 +178,10 @@ As the full likelihood is  <script type="math/tex">p(x_i,z_i|\phi)</script>, we 
 \end{align}
  %]]></script>
 
-<p>We can use MCMC method to approximate this expectation, specifically, we can construct a Markov chain to sample <script type="math/tex">z_i</script> 
-from <script type="math/tex">p(z_i | x_i, \phi)</script>, and sum over gradient based on each sample $z_i^{s}$ to calculate expectation.</p>
+<p>We can use MCMC method to approximate this expectation, specifically, we can construct a Markov chain to sample $z_i$
+from $p(z_i | x_i, \phi)$, and sum over gradient based on each sample $z_i^{s}$ to calculate expectation.</p>
 
-<p>We denote the collection of samples as <script type="math/tex">{\{z_i^{s}\}}_{s=1}^{|S|}</script>
+<p>We denote the collection of samples as ${{z_i^{s}}}_{s=1}^{|S|}$
  , the approximation is:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
@@ -192,12 +190,11 @@ from <script type="math/tex">p(z_i | x_i, \phi)</script>, and sum over gradient 
 &E_{z_i | x_i, \phi} \frac{\partial}{\partial \phi} \log p(x_i, z_i | \phi) \\
 =& \sum_{s \in S} \frac{\partial}{\partial \phi} \log p(x_i, z_i^{s} | \phi) \\
 =& \sum_{s \in S} \frac{\partial}{\partial \phi} [\log p(x_i | z_i^{s}, \phi) + \log p(z_i^{s})]\\
-=& \sum_{s \in S} \frac{\partial}{\partial \phi} \log p(x_i |z_i^{s}, \phi)\\
+=& \sum_{s \in S} \frac{\partial}{\partial \phi} \log p(x_i |z_i^{s}, \phi)
 \end{align}
-
  %]]></script>
 
-<p>In these example, the Gibbs sampler for <script type="math/tex">p(z_i|x_i, \phi)</script>
+<p>In these example, the Gibbs sampler for $p(z_i|x_i, \phi)$
 is:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
@@ -227,6 +224,20 @@ LL(\theta, \phi) &= \log p(\phi;\beta) + \sum_i \log p(x_i|\phi, \theta_i) + \su
 <script type="math/tex">\log p(x_i|\phi, \theta_i)</script></p>
 
 <p>The approximation:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+
+\begin{align}
+ &\frac{\partial}{\partial \phi} \log p(x_i | \phi, \theta) \\
+=&\frac{1}{p(x_i | \phi, \theta)} \frac{\partial}{\partial \phi} p(x_i | \phi, \theta) \\
+=&\frac{1}{p(x_i | \phi, \theta)} \sum_{z_i} \frac{\partial}{\partial \phi} p(x_i, z_i | \phi, \theta) \\
+=&\frac{1}{p(x_i | \phi, \theta)} \sum_{z_i} p(x_i, z_i | \phi, \theta) \frac{\partial}{\partial \phi} \log p(x_i, z_i | \phi, \theta) \\
+=&\sum_{z_i} \frac{p(x_i, z_i | \phi, \theta)}{p(x_i | \phi, \theta)} \frac{\partial}{\partial \phi} \log p(x_i, z_i | \phi, \theta) \\
+=&\sum_{z_i} p(z_i | x_i, \phi, \theta) \frac{\partial}{\partial \phi} \log p(x_i, z_i | \phi, \theta) \\
+=&E_{z_i | x_i, \phi, \theta} \frac{\partial}{\partial \phi} \log p(x_i, z_i | \phi, \theta) \\
+=&E_{z_i | x_i, \phi, \theta} \frac{\partial}{\partial \phi} [\log p(x_i|z_i, \phi) + \log p(z_i | \theta)] \\
+\end{align}
+ %]]></script>
 
 <p>This draft may contain some mistakes, if you found any, I will appreciate the correction. </p>
 </div>

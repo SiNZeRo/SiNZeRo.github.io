@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Approximation | 简记·思行-SiNZeRo]]></title>
   <link href="http://SiNZeRo.github.io/blog/categories/approximation/atom.xml" rel="self"/>
   <link href="http://SiNZeRo.github.io/"/>
-  <updated>2014-12-18T17:25:15+08:00</updated>
+  <updated>2014-12-18T22:03:35+08:00</updated>
   <id>http://SiNZeRo.github.io/</id>
   <author>
     <name><![CDATA[SiNZeRo]]></name>
@@ -26,17 +26,18 @@ p(X, Z, \phi) = \prod_i p(x_i|z_i,\phi) \prod_i p(z_i;\alpha) p(\phi;\beta)
 
 <p>one may recognize it as collapsed form of Latent Dirichlet Allocation(LDA), here omits $\alpha, \beta$ for simplicity.</p>
 
-<p>Now, we want to calculate the gradient of it’s marginalized posterior <script type="math/tex">p(\phi | X)</script> 
+<p>Now, we want to calculate the gradient of it’s marginalized posterior $p(\phi|X)$
 as following:</p>
 
-<script type="math/tex; mode=display">
-\frac{\partial \log p(\phi | X)}{\partial \phi}
-= \frac{\partial}{\partial \phi} [\sum_i \log  p(x_i | \phi) + \log p(\phi)- \log p(X)] \\
-= \sum_i  {\frac{\partial}{\partial \phi} \log p(x_i | \phi)} + \frac{\partial \log p(\phi)}{\partial \phi}
-</script>
+<script type="math/tex; mode=display">% &lt;![CDATA[
+\begin{align}
+ &\frac{\partial \log p(\phi | X)}{\partial \phi} \\
+= &\frac{\partial}{\partial \phi} [\sum_i \log  p(x_i | \phi) + \log p(\phi)- \log p(X)] \\
+= &\sum_i  {\frac{\partial}{\partial \phi} \log p(x_i | \phi)} + \frac{\partial \log p(\phi)}{\partial \phi}
+\end{align} %]]&gt;</script>
 
-<p>The second is just gradient of prior distribution of <script type="math/tex">\phi</script>, first term is incomplete log likelihood, We can not calculate it directly.
-As the full likelihood is  <script type="math/tex">p(x_i,z_i|\phi)</script>, we calculate it as following:</p>
+<p>The second is just gradient of prior distribution of $\phi$, first term is incomplete log likelihood, We can not calculate it directly.
+As the full likelihood is  $p(x_i,z_i|\phi)$, we calculate it as following:</p>
 
 <script type="math/tex; mode=display">
 \frac{\partial}{\partial \phi} \log p(x | \phi) \\ 
@@ -61,10 +62,10 @@ As the full likelihood is  <script type="math/tex">p(x_i,z_i|\phi)</script>, we 
 \end{align}
  %]]&gt;</script>
 
-<p>We can use MCMC method to approximate this expectation, specifically, we can construct a Markov chain to sample <script type="math/tex">z_i</script> 
-from <script type="math/tex">p(z_i | x_i, \phi)</script>, and sum over gradient based on each sample $z_i^{s}$ to calculate expectation.</p>
+<p>We can use MCMC method to approximate this expectation, specifically, we can construct a Markov chain to sample $z_i$
+from $p(z_i | x_i, \phi)$, and sum over gradient based on each sample $z_i^{s}$ to calculate expectation.</p>
 
-<p>We denote the collection of samples as <script type="math/tex">{\{z_i^{s}\}}_{s=1}^{|S|}</script>
+<p>We denote the collection of samples as $}_{s=1}^{|S|}$
  , the approximation is:</p>
 
 <script type="math/tex; mode=display">% &lt;![CDATA[
@@ -73,12 +74,11 @@ from <script type="math/tex">p(z_i | x_i, \phi)</script>, and sum over gradient 
 &E_{z_i | x_i, \phi} \frac{\partial}{\partial \phi} \log p(x_i, z_i | \phi) \\
 =& \sum_{s \in S} \frac{\partial}{\partial \phi} \log p(x_i, z_i^{s} | \phi) \\
 =& \sum_{s \in S} \frac{\partial}{\partial \phi} [\log p(x_i | z_i^{s}, \phi) + \log p(z_i^{s})]\\
-=& \sum_{s \in S} \frac{\partial}{\partial \phi} \log p(x_i |z_i^{s}, \phi)\\
+=& \sum_{s \in S} \frac{\partial}{\partial \phi} \log p(x_i |z_i^{s}, \phi)
 \end{align}
-
  %]]&gt;</script>
 
-<p>In these example, the Gibbs sampler for <script type="math/tex">p(z_i|x_i, \phi)</script>
+<p>In these example, the Gibbs sampler for $p(z_i|x_i, \phi)$
 is:</p>
 
 <script type="math/tex; mode=display">% &lt;![CDATA[
@@ -108,6 +108,20 @@ LL(\theta, \phi) &= \log p(\phi;\beta) + \sum_i \log p(x_i|\phi, \theta_i) + \su
 <script type="math/tex">\log p(x_i|\phi, \theta_i)</script></p>
 
 <p>The approximation:</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+
+\begin{align}
+ &\frac{\partial}{\partial \phi} \log p(x_i | \phi, \theta) \\
+=&\frac{1}{p(x_i | \phi, \theta)} \frac{\partial}{\partial \phi} p(x_i | \phi, \theta) \\
+=&\frac{1}{p(x_i | \phi, \theta)} \sum_{z_i} \frac{\partial}{\partial \phi} p(x_i, z_i | \phi, \theta) \\
+=&\frac{1}{p(x_i | \phi, \theta)} \sum_{z_i} p(x_i, z_i | \phi, \theta) \frac{\partial}{\partial \phi} \log p(x_i, z_i | \phi, \theta) \\
+=&\sum_{z_i} \frac{p(x_i, z_i | \phi, \theta)}{p(x_i | \phi, \theta)} \frac{\partial}{\partial \phi} \log p(x_i, z_i | \phi, \theta) \\
+=&\sum_{z_i} p(z_i | x_i, \phi, \theta) \frac{\partial}{\partial \phi} \log p(x_i, z_i | \phi, \theta) \\
+=&E_{z_i | x_i, \phi, \theta} \frac{\partial}{\partial \phi} \log p(x_i, z_i | \phi, \theta) \\
+=&E_{z_i | x_i, \phi, \theta} \frac{\partial}{\partial \phi} [\log p(x_i|z_i, \phi) + \log p(z_i | \theta)] \\
+\end{align}
+ %]]&gt;</script>
 
 <p>This draft may contain some mistakes, if you found any, I will appreciate the correction. </p>
 ]]></content>
