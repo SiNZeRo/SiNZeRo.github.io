@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Optimization | 简记·思行-SiNZeRo]]></title>
+  <link href="http://SiNZeRo.github.io/blog/categories/optimization/atom.xml" rel="self"/>
+  <link href="http://SiNZeRo.github.io/"/>
+  <updated>2014-12-18T16:30:19+08:00</updated>
+  <id>http://SiNZeRo.github.io/</id>
+  <author>
+    <name><![CDATA[SiNZeRo]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Approximate Gradient of incomplete log likelihood]]></title>
+    <link href="http://SiNZeRo.github.io/blog/2014/12/18/approximate-gradient-of-incomplete-log-likelihood/"/>
+    <updated>2014-12-18T14:40:00+08:00</updated>
+    <id>http://SiNZeRo.github.io/blog/2014/12/18/approximate-gradient-of-incomplete-log-likelihood</id>
+    <content type="html"><![CDATA[<p>Given a joint model</p>
+
+<script type="math/tex; mode=display">
+p(X, Z, \phi) = \prod_i p(x_i|z_i,\phi) \prod_i p(z_i;\alpha) p(\phi;\beta)
+</script>
+
+<p>one may recognize it as collapsed form of Latent Dirichlet Allocation(LDA), there omit $\alpha, \beta$ for simplicity.</p>
+
+<p>Now, we want to calculate the gradient of it’s marginalized posterior <script type="math/tex">p(\phi | X)</script> 
+as following:</p>
+
+<script type="math/tex; mode=display">
+\frac{\partial \log p(\phi | X)}{\partial \phi}
+= \frac{\partial}{\partial \phi} [\sum_i \log  p(x_i | \phi) + \log p(\phi)- \log p(X)] \\
+= \sum_i  {\frac{\partial}{\partial \phi} \log p(x_i | \phi)} + \frac{\partial \log p(\phi)}{\partial \phi}
+</script>
+
+<p>The second is just gradient of prior distribution of <script type="math/tex">\phi</script>, first term is incomplete log likelihood, We can not calculate it directly.
+As the full likelihood is  <script type="math/tex">p(x_i,z_i|\phi)</script>, we calculate it as following:</p>
+
+<script type="math/tex; mode=display">
+\frac{\partial}{\partial \phi} \log p(x | \phi) \\ 
+= \frac{\partial}{\partial \phi} \log \sum_{z_i} p(x_i, z_i | \phi) \\
+= \frac{\partial}{\partial \phi} \log E_{z_i} p(x_i|z_i, \phi)
+</script>
+
+<p>where, in line-2, log cannot go through the summation, note that line2 and line3 are equivalent.</p>
+
+<p>Here, we derive the approximation as following:</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+
+\begin{align}
+ &\frac{\partial}{\partial \phi} \log p(x_i | \phi) \\
+=&\frac{1}{p(x_i | \phi)} \frac{\partial}{\partial \phi} p(x_i | \phi) \\
+=&\frac{1}{p(x_i | \phi)} \sum_{z_i} \frac{\partial}{\partial \phi} p(x_i, z_i | \phi) \\
+=&\frac{1}{p(x_i | \phi)} \sum_{z_i} p(x_i, z_i | \phi) \frac{\partial}{\partial \phi} \log p(x_i, z_i | \phi) \\
+=&\sum_{z_i} \frac{p(x_i, z_i | \phi)}{p(x_i | \phi)} \frac{\partial}{\partial \phi} \log p(x_i, z_i | \phi) \\
+=&\sum_{z_i} p(z_i | x_i, \phi) \frac{\partial}{\partial \phi} \log p(x_i, z_i | \phi) \\
+=&E_{z_i | x_i, \phi} \frac{\partial}{\partial \phi} \log p(x_i, z_i | \phi) \\
+\end{align}
+ %]]&gt;</script>
+
+<p>We can use MCMC method to approximate this expectation, specifically, we can construct a Markov chain to sample <script type="math/tex">z_i</script> 
+from <script type="math/tex">p(z_i | x_i, \phi)</script>, and sum over gradient based on each sample $z_i^{s}$ to calculate expectation.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>We denote the collection of samples as ${z_i^{s}}_{s=1}^{</td>
+      <td>S</td>
+      <td>}$, the approximation is:</td>
+    </tr>
+  </tbody>
+</table>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+
+\begin{align}
+&E_{z_i | x_i, \phi} \frac{\partial}{\partial \phi} \log p(x_i, z_i | \phi) \\
+=& \sum_{s \in S} \frac{\partial}{\partial \phi} \log p(x_i, z_i^{s} | \phi) \\
+=& \sum_{s \in S} \frac{\partial}{\partial \phi} [\log p(x_i | z_i^{s}, \phi) + \log p(z_i^{s})]\\
+=& \sum_{s \in S} \frac{\partial}{\partial \phi} \log p(x_i |z_i^{s}, \phi)\\
+\end{align}
+
+ %]]&gt;</script>
+
+<table>
+  <tbody>
+    <tr>
+      <td>In these example, the Gibbs sampler for $$p(z_i</td>
+      <td>x_i, \phi)$$ is:</td>
+    </tr>
+  </tbody>
+</table>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+
+\begin{align}
+&p(z_{ij} = k| z_{i}^{\neg ij}, x_{ij}, \phi) \\
+\propto & (n_{dk}^{\neg ij} + \alpha) \phi_{kx_{ij}}
+\end{align}
+ %]]&gt;</script>
+
+<p>This draft may contain some mistakes, if you found any, I will appreciate the correction. </p>
+]]></content>
+  </entry>
+  
+</feed>

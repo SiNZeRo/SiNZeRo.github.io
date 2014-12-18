@@ -1,0 +1,428 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Approximate Gradient of incomplete log likelihood - 简记·思行-SiNZeRo</title>
+  <meta name="author" content="SiNZeRo">
+
+<meta name="author" content="SiNZeRo">
+
+<meta name="description" content="SiNZeRo, Code and Sunshine">
+<meta name="keywords" content="code, python, data mining, machine learning, topic model, photography">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://SiNZeRo.github.io/blog/2014/12/18/approximate-gradient-of-incomplete-log-likelihood">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="简记·思行-SiNZeRo" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-42739284-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">简记·思行-SiNZeRo</a></h1>
+  
+    <h2>Sunshine and Imagination</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:SiNZeRo.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Approximate Gradient of Incomplete Log Likelihood</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-12-18T14:40:00+08:00" pubdate data-updated="true">Dec 18<span>th</span>, 2014</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+    <hr/>
+  </header>
+
+
+<div class="entry-content"><p>Given a joint model</p>
+
+<script type="math/tex; mode=display">
+p(X, Z, \phi) = \prod_i p(x_i|z_i,\phi) \prod_i p(z_i;\alpha) p(\phi;\beta)
+</script>
+
+<p>one may recognize it as collapsed form of Latent Dirichlet Allocation(LDA), there omit $\alpha, \beta$ for simplicity.</p>
+
+<p>Now, we want to calculate the gradient of it’s marginalized posterior <script type="math/tex">p(\phi | X)</script> 
+as following:</p>
+
+<script type="math/tex; mode=display">
+\frac{\partial \log p(\phi | X)}{\partial \phi}
+= \frac{\partial}{\partial \phi} [\sum_i \log  p(x_i | \phi) + \log p(\phi)- \log p(X)] \\
+= \sum_i  {\frac{\partial}{\partial \phi} \log p(x_i | \phi)} + \frac{\partial \log p(\phi)}{\partial \phi}
+</script>
+
+<p>The second is just gradient of prior distribution of <script type="math/tex">\phi</script>, first term is incomplete log likelihood, We can not calculate it directly.
+As the full likelihood is  <script type="math/tex">p(x_i,z_i|\phi)</script>, we calculate it as following:</p>
+
+<script type="math/tex; mode=display">
+\frac{\partial}{\partial \phi} \log p(x | \phi) \\ 
+= \frac{\partial}{\partial \phi} \log \sum_{z_i} p(x_i, z_i | \phi) \\
+= \frac{\partial}{\partial \phi} \log E_{z_i} p(x_i|z_i, \phi)
+</script>
+
+<p>where, in line-2, log cannot go through the summation, note that line2 and line3 are equivalent.</p>
+
+<p>Here, we derive the approximation as following:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+
+\begin{align}
+ &\frac{\partial}{\partial \phi} \log p(x_i | \phi) \\
+=&\frac{1}{p(x_i | \phi)} \frac{\partial}{\partial \phi} p(x_i | \phi) \\
+=&\frac{1}{p(x_i | \phi)} \sum_{z_i} \frac{\partial}{\partial \phi} p(x_i, z_i | \phi) \\
+=&\frac{1}{p(x_i | \phi)} \sum_{z_i} p(x_i, z_i | \phi) \frac{\partial}{\partial \phi} \log p(x_i, z_i | \phi) \\
+=&\sum_{z_i} \frac{p(x_i, z_i | \phi)}{p(x_i | \phi)} \frac{\partial}{\partial \phi} \log p(x_i, z_i | \phi) \\
+=&\sum_{z_i} p(z_i | x_i, \phi) \frac{\partial}{\partial \phi} \log p(x_i, z_i | \phi) \\
+=&E_{z_i | x_i, \phi} \frac{\partial}{\partial \phi} \log p(x_i, z_i | \phi) \\
+\end{align}
+ %]]></script>
+
+<p>We can use MCMC method to approximate this expectation, specifically, we can construct a Markov chain to sample <script type="math/tex">z_i</script> 
+from <script type="math/tex">p(z_i | x_i, \phi)</script>, and sum over gradient based on each sample $z_i^{s}$ to calculate expectation.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>We denote the collection of samples as ${z_i^{s}}_{s=1}^{</td>
+      <td>S</td>
+      <td>}$, the approximation is:</td>
+    </tr>
+  </tbody>
+</table>
+
+<script type="math/tex; mode=display">% <![CDATA[
+
+\begin{align}
+&E_{z_i | x_i, \phi} \frac{\partial}{\partial \phi} \log p(x_i, z_i | \phi) \\
+=& \sum_{s \in S} \frac{\partial}{\partial \phi} \log p(x_i, z_i^{s} | \phi) \\
+=& \sum_{s \in S} \frac{\partial}{\partial \phi} [\log p(x_i | z_i^{s}, \phi) + \log p(z_i^{s})]\\
+=& \sum_{s \in S} \frac{\partial}{\partial \phi} \log p(x_i |z_i^{s}, \phi)\\
+\end{align}
+
+ %]]></script>
+
+<table>
+  <tbody>
+    <tr>
+      <td>In these example, the Gibbs sampler for $$p(z_i</td>
+      <td>x_i, \phi)$$ is:</td>
+    </tr>
+  </tbody>
+</table>
+
+<script type="math/tex; mode=display">% <![CDATA[
+
+\begin{align}
+&p(z_{ij} = k| z_{i}^{\neg ij}, x_{ij}, \phi) \\
+\propto & (n_{dk}^{\neg ij} + \alpha) \phi_{kx_{ij}}
+\end{align}
+ %]]></script>
+
+<p>This draft may contain some mistakes, if you found any, I will appreciate the correction. </p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">SiNZeRo</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-12-18T14:40:00+08:00" pubdate data-updated="true">Dec 18<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/approximation/'>Approximation</a>, <a class='category' href='/blog/categories/bayesian/'>Bayesian</a>, <a class='category' href='/blog/categories/optimization/'>Optimization</a>, <a class='category' href='/blog/categories/sampling/'>Sampling</a>, <a class='category' href='/blog/categories/topic-model/'>Topic Model</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://SiNZeRo.github.io/blog/2014/12/18/approximate-gradient-of-incomplete-log-likelihood/" data-via="" data-counturl="http://SiNZeRo.github.io/blog/2014/12/18/approximate-gradient-of-incomplete-log-likelihood/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/08/08/how-does-spotify-use-big-data/" title="Previous Post: How does Spotify use big data?">&laquo; How does Spotify use big data?</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/12/18/approximate-gradient-of-incomplete-log-likelihood/">Approximate Gradient of Incomplete Log Likelihood</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/08/08/how-does-spotify-use-big-data/">How Does Spotify Use Big Data?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/08/06/modeling-musical-influence-with-topic-models/">Some Notes on ICML13 Papers</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/31/update-ubuntu-source/">Ubuntu Source Maintained by CUHK</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/27/lda-and-its-variants/">LDA and Its Variants</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/26/priors-and-smoothing-of-lda/">Priors and Smoothing of LDA</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/26/latex-test/">Latex Test</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/20/octopress-configuration/">Octopress-配置</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/20/dblp-plugin/">DBLP_plugin</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/20/my-first-blog/">简行之始</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+    <ul id="category-list"><li><a href='/blog/categories/android/'>android (1)</a></li><li><a href='/blog/categories/approximation/'>Approximation (1)</a></li><li><a href='/blog/categories/bayesian/'>Bayesian (1)</a></li><li><a href='/blog/categories/code/'>Code (2)</a></li><li><a href='/blog/categories/generative-model/'>Generative Model (1)</a></li><li><a href='/blog/categories/javascript/'>Javascript (1)</a></li><li><a href='/blog/categories/latex/'>Latex (1)</a></li><li><a href='/blog/categories/lda/'>LDA (1)</a></li><li><a href='/blog/categories/notes/'>Notes (1)</a></li><li><a href='/blog/categories/optimization/'>Optimization (1)</a></li><li><a href='/blog/categories/prior/'>Prior (1)</a></li><li><a href='/blog/categories/research/'>Research (1)</a></li><li><a href='/blog/categories/sampling/'>Sampling (1)</a></li><li><a href='/blog/categories/smoothing/'>Smoothing (1)</a></li><li><a href='/blog/categories/topic-model/'>Topic Model (1)</a></li><li><a href='/blog/categories/topic-modeling/'>Topic Modeling (1)</a></li><li><a href='/blog/categories/ubuntu/'>ubuntu (1)</a></li></ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/SiNZeRo">@SiNZeRo</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'SiNZeRo',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+<section>
+  <h1>Recent Comments</h1>
+  <div id="dsq-recentcomments" class="dsq-widget"><script type="text/javascript" src="http://disqus.com/forums/sinzero/recent_comments_widget.js?hide_avatars=0"></script></div>
+</section>
+
+
+<section>
+<div id="clustrmaps-widget" style="text-align:center;"></div><script type="text/javascript">var _clustrmaps = {'url' : 'http://sinzero.github.io', 'user' : 1105359, 'server' : '2', 'id' : 'clustrmaps-widget', 'version' : 1, 'date' : '2013-07-28', 'lang' : 'en', 'corners' : 'square' };(function (){ var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = 'http://www2.clustrmaps.com/counter/map.js'; var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);})();</script><noscript><a href="http://www2.clustrmaps.com/user/05d10ddcf"><img src="http://www2.clustrmaps.com/stats/maps-no_clusters/sinzero.github.io-thumb.jpg" alt="Locations of visitors to this page" /></a></noscript>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - SiNZeRo -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'sinzero';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://SiNZeRo.github.io/blog/2014/12/18/approximate-gradient-of-incomplete-log-likelihood/';
+        var disqus_url = 'http://SiNZeRo.github.io/blog/2014/12/18/approximate-gradient-of-incomplete-log-likelihood/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

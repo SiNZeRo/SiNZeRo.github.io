@@ -114,6 +114,129 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2014/12/18/approximate-gradient-of-incomplete-log-likelihood/">Approximate Gradient of Incomplete Log Likelihood</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-12-18T14:40:00+08:00" pubdate data-updated="true">Dec 18<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/12/18/approximate-gradient-of-incomplete-log-likelihood/#disqus_thread">Comments</a>
+        
+      </p>
+    
+    <hr/>
+  </header>
+
+
+  <div class="entry-content"><p>Given a joint model</p>
+
+<script type="math/tex; mode=display">
+p(X, Z, \phi) = \prod_i p(x_i|z_i,\phi) \prod_i p(z_i;\alpha) p(\phi;\beta)
+</script>
+
+<p>one may recognize it as collapsed form of Latent Dirichlet Allocation(LDA), there omit $\alpha, \beta$ for simplicity.</p>
+
+<p>Now, we want to calculate the gradient of it’s marginalized posterior <script type="math/tex">p(\phi | X)</script> 
+as following:</p>
+
+<script type="math/tex; mode=display">
+\frac{\partial \log p(\phi | X)}{\partial \phi}
+= \frac{\partial}{\partial \phi} [\sum_i \log  p(x_i | \phi) + \log p(\phi)- \log p(X)] \\
+= \sum_i  {\frac{\partial}{\partial \phi} \log p(x_i | \phi)} + \frac{\partial \log p(\phi)}{\partial \phi}
+</script>
+
+<p>The second is just gradient of prior distribution of <script type="math/tex">\phi</script>, first term is incomplete log likelihood, We can not calculate it directly.
+As the full likelihood is  <script type="math/tex">p(x_i,z_i|\phi)</script>, we calculate it as following:</p>
+
+<script type="math/tex; mode=display">
+\frac{\partial}{\partial \phi} \log p(x | \phi) \\ 
+= \frac{\partial}{\partial \phi} \log \sum_{z_i} p(x_i, z_i | \phi) \\
+= \frac{\partial}{\partial \phi} \log E_{z_i} p(x_i|z_i, \phi)
+</script>
+
+<p>where, in line-2, log cannot go through the summation, note that line2 and line3 are equivalent.</p>
+
+<p>Here, we derive the approximation as following:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+
+\begin{align}
+ &\frac{\partial}{\partial \phi} \log p(x_i | \phi) \\
+=&\frac{1}{p(x_i | \phi)} \frac{\partial}{\partial \phi} p(x_i | \phi) \\
+=&\frac{1}{p(x_i | \phi)} \sum_{z_i} \frac{\partial}{\partial \phi} p(x_i, z_i | \phi) \\
+=&\frac{1}{p(x_i | \phi)} \sum_{z_i} p(x_i, z_i | \phi) \frac{\partial}{\partial \phi} \log p(x_i, z_i | \phi) \\
+=&\sum_{z_i} \frac{p(x_i, z_i | \phi)}{p(x_i | \phi)} \frac{\partial}{\partial \phi} \log p(x_i, z_i | \phi) \\
+=&\sum_{z_i} p(z_i | x_i, \phi) \frac{\partial}{\partial \phi} \log p(x_i, z_i | \phi) \\
+=&E_{z_i | x_i, \phi} \frac{\partial}{\partial \phi} \log p(x_i, z_i | \phi) \\
+\end{align}
+ %]]></script>
+
+<p>We can use MCMC method to approximate this expectation, specifically, we can construct a Markov chain to sample <script type="math/tex">z_i</script> 
+from <script type="math/tex">p(z_i | x_i, \phi)</script>, and sum over gradient based on each sample $z_i^{s}$ to calculate expectation.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>We denote the collection of samples as ${z_i^{s}}_{s=1}^{</td>
+      <td>S</td>
+      <td>}$, the approximation is:</td>
+    </tr>
+  </tbody>
+</table>
+
+<script type="math/tex; mode=display">% <![CDATA[
+
+\begin{align}
+&E_{z_i | x_i, \phi} \frac{\partial}{\partial \phi} \log p(x_i, z_i | \phi) \\
+=& \sum_{s \in S} \frac{\partial}{\partial \phi} \log p(x_i, z_i^{s} | \phi) \\
+=& \sum_{s \in S} \frac{\partial}{\partial \phi} [\log p(x_i | z_i^{s}, \phi) + \log p(z_i^{s})]\\
+=& \sum_{s \in S} \frac{\partial}{\partial \phi} \log p(x_i |z_i^{s}, \phi)\\
+\end{align}
+
+ %]]></script>
+
+<table>
+  <tbody>
+    <tr>
+      <td>In these example, the Gibbs sampler for $$p(z_i</td>
+      <td>x_i, \phi)$$ is:</td>
+    </tr>
+  </tbody>
+</table>
+
+<script type="math/tex; mode=display">% <![CDATA[
+
+\begin{align}
+&p(z_{ij} = k| z_{i}^{\neg ij}, x_{ij}, \phi) \\
+\propto & (n_{dk}^{\neg ij} + \alpha) \phi_{kx_{ij}}
+\end{align}
+ %]]></script>
+
+<p>This draft may contain some mistakes, if you found any, I will appreciate the correction. </p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/08/08/how-does-spotify-use-big-data/">How Does Spotify Use Big Data?</a></h1>
     
     
@@ -815,65 +938,6 @@ P(E(n,k);p) = {n \choose k} p^k (1-p)^{ n-k}
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/01/modify-files-under-the-slash-system-directory-on-android/">Modify Files Under the /System Directory on Android</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-01T20:33:00+08:00" pubdate data-updated="true">Jun 1<span>st</span>, 2012</time>
-        
-         | <a href="/blog/2012/06/01/modify-files-under-the-slash-system-directory-on-android/#disqus_thread">Comments</a>
-        
-      </p>
-    
-    <hr/>
-  </header>
-
-
-  <div class="entry-content"><p>I was trying to modify the <code>build.prop</code> file under <code>/system</code> directory. But this file is protected by system, we cannot directly edit it.
-I have tried several solutions listed below:</p>
-
-<ul>
-  <li>To utilize <code>RE(Root Explorer)</code>   to modify the permission of <code>/system</code>, however this method is failed on my G6 legend with <code>CM version android 2.3.7, modified by Devil</code>.
-2.I got some Tips from <a href="http://forum.xda-developers.com/showthread.php?t=664532&amp;page=18">http://forum.xda-developers.com/showthread.php?t=664532&amp;page=18</a>. In this post, they argued that modifying <code>/system</code> is only granted in the recovery mode.</li>
-  <li>
-    <p>So I did it in the following steps:</p>
-
-    <ol>
-      <li>Connect my phone to PC and test whether ADB is available.</li>
-      <li>Turn off the phone.</li>
-      <li>Hold on the back button and press the  turn-on button. Thus, the phone will go into the bootloader.</li>
-      <li>Enter the recovery menu, and find the advance option.         ( WARNING: if you don’t know how to enter the  recovery mode, please find related articles and read it <strong>carefully</strong>. )</li>
-      <li>Select Mount <code>/system</code> and  press on it. The option will become <code>Unmount /system</code>, which is successful result.</li>
-      <li>On PC, run command <code>adb remount</code>.  (This step maybe optional, I haven’t attempt to ignore it yet :)</li>
-      <li>And then, run <code>adb push build.prop /system/build.prop</code>.  so far, your file must has been push into <code>/system</code></li>
-      <li>Select <code>Unmount /system</code> and  press on it.  Restart yout phone to check the changes.</li>
-    </ol>
-  </li>
-</ul>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -887,6 +951,10 @@ I have tried several solutions listed below:</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/12/18/approximate-gradient-of-incomplete-log-likelihood/">Approximate Gradient of Incomplete Log Likelihood</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/08/08/how-does-spotify-use-big-data/">How Does Spotify Use Big Data?</a>
@@ -924,27 +992,11 @@ I have tried several solutions listed below:</p>
         <a href="/blog/2013/07/20/my-first-blog/">简行之始</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/06/01/modify-files-under-the-slash-system-directory-on-android/">Modify Files Under the /System Directory on Android</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li class='category'><a href='/blog/categories/code/'>Code (2)</a></li>
-<li class='category'><a href='/blog/categories/generative-model/'>Generative Model (1)</a></li>
-<li class='category'><a href='/blog/categories/javascript/'>Javascript (1)</a></li>
-<li class='category'><a href='/blog/categories/lda/'>LDA (1)</a></li>
-<li class='category'><a href='/blog/categories/latex/'>Latex (1)</a></li>
-<li class='category'><a href='/blog/categories/notes/'>Notes (1)</a></li>
-<li class='category'><a href='/blog/categories/prior/'>Prior (1)</a></li>
-<li class='category'><a href='/blog/categories/research/'>Research (1)</a></li>
-<li class='category'><a href='/blog/categories/smoothing/'>Smoothing (1)</a></li>
-<li class='category'><a href='/blog/categories/topic-modeling/'>Topic Modeling (1)</a></li>
-<li class='category'><a href='/blog/categories/android/'>android (1)</a></li>
-<li class='category'><a href='/blog/categories/ubuntu/'>ubuntu (1)</a></li>
-</ul>
+    <ul id="category-list"><li><a href='/blog/categories/android/'>android (1)</a></li><li><a href='/blog/categories/approximation/'>Approximation (1)</a></li><li><a href='/blog/categories/bayesian/'>Bayesian (1)</a></li><li><a href='/blog/categories/code/'>Code (2)</a></li><li><a href='/blog/categories/generative-model/'>Generative Model (1)</a></li><li><a href='/blog/categories/javascript/'>Javascript (1)</a></li><li><a href='/blog/categories/latex/'>Latex (1)</a></li><li><a href='/blog/categories/lda/'>LDA (1)</a></li><li><a href='/blog/categories/notes/'>Notes (1)</a></li><li><a href='/blog/categories/optimization/'>Optimization (1)</a></li><li><a href='/blog/categories/prior/'>Prior (1)</a></li><li><a href='/blog/categories/research/'>Research (1)</a></li><li><a href='/blog/categories/sampling/'>Sampling (1)</a></li><li><a href='/blog/categories/smoothing/'>Smoothing (1)</a></li><li><a href='/blog/categories/topic-model/'>Topic Model (1)</a></li><li><a href='/blog/categories/topic-modeling/'>Topic Modeling (1)</a></li><li><a href='/blog/categories/ubuntu/'>ubuntu (1)</a></li></ul>
 </section>
 
 <section>
@@ -992,7 +1044,7 @@ I have tried several solutions listed below:</p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - SiNZeRo -
+  Copyright &copy; 2014 - SiNZeRo -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
