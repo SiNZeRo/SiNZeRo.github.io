@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Approximate Gradient of incomplete log likelihood - 简记·思行-SiNZeRo</title>
+  <title>Approximate Gradient of incomplete-data log likelihood - 简记·思行-SiNZeRo</title>
   <meta name="author" content="SiNZeRo">
 
 <meta name="author" content="SiNZeRo">
@@ -108,7 +108,7 @@ MathJax.Hub.Config({
   
   <header>
     
-      <h1 class="entry-title">Approximate Gradient of Incomplete Log Likelihood</h1>
+      <h1 class="entry-title">Approximate Gradient of Incomplete-data Log Likelihood</h1>
     
     
       <p class="meta">
@@ -152,7 +152,7 @@ as following:</p>
 = &\sum_i  {\frac{\partial}{\partial \phi} \log p(x_i | \phi)} + \frac{\partial \log p(\phi)}{\partial \phi}
 \end{align} %]]></script>
 
-<p>The second is just gradient of prior distribution of $\phi$, first term is incomplete log likelihood, We can not calculate it directly.
+<p>The second is just gradient of prior distribution of $\phi$, first term is incomplete-data log likelihood, We can not calculate it directly.
 As the full likelihood is  $p(x_i,z_i|\phi)$, we calculate it as following:</p>
 
 <script type="math/tex; mode=display">
@@ -307,7 +307,7 @@ LL(\theta, \phi) &= \log p(\phi;\beta) + \sum_i \log p(x_i|\phi, \theta_i) + \su
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2014/12/18/approximate-gradient-of-incomplete-log-likelihood/">Approximate Gradient of Incomplete Log Likelihood</a>
+        <a href="/blog/2014/12/18/approximate-gradient-of-incomplete-log-likelihood/">Approximate Gradient of Incomplete-data Log Likelihood</a>
       </li>
     
       <li class="post">

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Topic Model | 简记·思行-SiNZeRo]]></title>
   <link href="http://SiNZeRo.github.io/blog/categories/topic-model/atom.xml" rel="self"/>
   <link href="http://SiNZeRo.github.io/"/>
-  <updated>2014-12-18T22:03:35+08:00</updated>
+  <updated>2014-12-22T16:47:33+08:00</updated>
   <id>http://SiNZeRo.github.io/</id>
   <author>
     <name><![CDATA[SiNZeRo]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Approximate Gradient of incomplete log likelihood]]></title>
+    <title type="html"><![CDATA[Approximate Gradient of incomplete-data log likelihood]]></title>
     <link href="http://SiNZeRo.github.io/blog/2014/12/18/approximate-gradient-of-incomplete-log-likelihood/"/>
     <updated>2014-12-18T14:40:00+08:00</updated>
     <id>http://SiNZeRo.github.io/blog/2014/12/18/approximate-gradient-of-incomplete-log-likelihood</id>
@@ -36,7 +36,7 @@ as following:</p>
 = &\sum_i  {\frac{\partial}{\partial \phi} \log p(x_i | \phi)} + \frac{\partial \log p(\phi)}{\partial \phi}
 \end{align} %]]&gt;</script>
 
-<p>The second is just gradient of prior distribution of $\phi$, first term is incomplete log likelihood, We can not calculate it directly.
+<p>The second is just gradient of prior distribution of $\phi$, first term is incomplete-data log likelihood, We can not calculate it directly.
 As the full likelihood is  $p(x_i,z_i|\phi)$, we calculate it as following:</p>
 
 <script type="math/tex; mode=display">
