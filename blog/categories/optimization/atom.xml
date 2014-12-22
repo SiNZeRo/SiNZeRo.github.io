@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Optimization | 简记·思行-SiNZeRo]]></title>
   <link href="http://SiNZeRo.github.io/blog/categories/optimization/atom.xml" rel="self"/>
   <link href="http://SiNZeRo.github.io/"/>
-  <updated>2014-12-22T16:47:33+08:00</updated>
+  <updated>2014-12-22T17:10:29+08:00</updated>
   <id>http://SiNZeRo.github.io/</id>
   <author>
     <name><![CDATA[SiNZeRo]]></name>
@@ -18,7 +18,16 @@
     <link href="http://SiNZeRo.github.io/blog/2014/12/18/approximate-gradient-of-incomplete-log-likelihood/"/>
     <updated>2014-12-18T14:40:00+08:00</updated>
     <id>http://SiNZeRo.github.io/blog/2014/12/18/approximate-gradient-of-incomplete-log-likelihood</id>
-    <content type="html"><![CDATA[<p>Given a joint model</p>
+    <content type="html"><![CDATA[<p>Let’s firstly give the result, and then show how to achieve it.</p>
+
+<script type="math/tex; mode=display">
+\begin{align}
+\frac{\partial}{\partial \theta_i} log(\theta;\alpha) \approx \sum_{s \in S} \frac{\partial}{\partial \theta_i} log(\theta|Z^{s},\alpha)
+\end{align}
+</script>
+
+<p>where $Z$ is latent variable and $S = \{Z^{1}, Z^{2} ….\}$ is the collection of samples.
+Given a joint model</p>
 
 <script type="math/tex; mode=display">
 p(X, Z, \phi) = \prod_i p(x_i|z_i,\phi) \prod_i p(z_i;\alpha) p(\phi;\beta)

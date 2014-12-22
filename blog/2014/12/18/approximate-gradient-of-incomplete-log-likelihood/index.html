@@ -134,7 +134,16 @@ MathJax.Hub.Config({
   </header>
 
 
-<div class="entry-content"><p>Given a joint model</p>
+<div class="entry-content"><p>Let’s firstly give the result, and then show how to achieve it.</p>
+
+<script type="math/tex; mode=display">
+\begin{align}
+\frac{\partial}{\partial \theta_i} log(\theta;\alpha) \approx \sum_{s \in S} \frac{\partial}{\partial \theta_i} log(\theta|Z^{s},\alpha)
+\end{align}
+</script>
+
+<p>where $Z$ is latent variable and $S = \{Z^{1}, Z^{2} ….\}$ is the collection of samples.
+Given a joint model</p>
 
 <script type="math/tex; mode=display">
 p(X, Z, \phi) = \prod_i p(x_i|z_i,\phi) \prod_i p(z_i;\alpha) p(\phi;\beta)
