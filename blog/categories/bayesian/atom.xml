@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Bayesian | 简记·思行-SiNZeRo]]></title>
   <link href="http://SiNZeRo.github.io/blog/categories/bayesian/atom.xml" rel="self"/>
   <link href="http://SiNZeRo.github.io/"/>
-  <updated>2015-05-22T22:36:51+08:00</updated>
+  <updated>2015-06-29T18:13:07+08:00</updated>
   <id>http://SiNZeRo.github.io/</id>
   <author>
     <name><![CDATA[SiNZeRo]]></name>
@@ -22,7 +22,8 @@
 
 <script type="math/tex; mode=display">
 \begin{align}
-\frac{\partial}{\partial \theta_i} log(\theta;\alpha) \approx \sum_{s \in S} \frac{\partial}{\partial \theta_i} log(\theta|Z^{s},\alpha)
+\frac{\partial}{\partial \theta_i } \log p(\theta;\alpha) \approx \sum_{s \in S} 
+\frac{\partial}{\partial \theta_i} \log p(\theta|Z^{s},\alpha)
 \end{align}
 </script>
 
@@ -74,7 +75,7 @@ As the full likelihood is  $p(x_i,z_i|\phi)$, we calculate it as following:</p>
 <p>We can use MCMC method to approximate this expectation, specifically, we can construct a Markov chain to sample $z_i$
 from $p(z_i | x_i, \phi)$, and sum over gradient based on each sample $z_i^{s}$ to calculate expectation.</p>
 
-<p>We denote the collection of samples as $}_{s=1}^{|S|}$
+<p>We denote the collection of samples as ${{z_i^{s}}}_{s=1}^{|S|}$
  , the approximation is:</p>
 
 <script type="math/tex; mode=display">% &lt;![CDATA[
