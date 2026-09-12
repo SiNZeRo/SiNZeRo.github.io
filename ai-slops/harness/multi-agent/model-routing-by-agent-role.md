@@ -6,10 +6,7 @@ date: 2026-09-12
 category: "HARNESS / MULTI-AGENT"
 article_parent: /ai-slops/harness/multi-agent/
 lang: en
-lang_label: EN
-translation_url: /ai-slops/harness/multi-agent/model-routing-by-agent-role/zh/
-translation_lang: zh-CN
-translation_label: 中文
+page_id: model-routing-by-agent-role
 permalink: /ai-slops/harness/multi-agent/model-routing-by-agent-role/
 ---
 
