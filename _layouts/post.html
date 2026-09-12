@@ -10,11 +10,17 @@ layout: default
       <div class="post-meta">
         {% if page.date %}<time>{{ page.date | date: "%b %d, %Y" }}</time>{% endif %}
         {% if page.article_parent %}<a href="{{ page.article_parent }}">Back to section ↑</a>{% endif %}
-        {% if page.translation_url %}
+        {% if page.available_languages and page.available_languages.size > 1 %}
           <span class="language-switch" aria-label="Language switcher">
-            <span class="lang-current">{{ page.lang_label | default: page.lang }}</span>
-            <span aria-hidden="true">/</span>
-            <a href="{{ page.translation_url }}"{% if page.translation_lang %} hreflang="{{ page.translation_lang }}"{% endif %}>{{ page.translation_label }}</a>
+            {% for lang in page.available_languages %}
+              {% capture lang_href %}{{ site.baseurl }}/{% if lang != site.default_lang %}{{ lang }}/{% endif %}{{ page.permalink_lang[lang] | remove_first: '/' }}{% endcapture %}
+              {% if forloop.index > 1 %}<span aria-hidden="true">/</span>{% endif %}
+              {% if lang == site.active_lang %}
+                <span class="lang-current">{% if lang == 'zh' %}中文{% else %}EN{% endif %}</span>
+              {% else %}
+                <a href="{{ lang_href }}" hreflang="{{ lang }}">{% if lang == 'zh' %}中文{% else %}EN{% endif %}</a>
+              {% endif %}
+            {% endfor %}
           </span>
         {% endif %}
       </div>
