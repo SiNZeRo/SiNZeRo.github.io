@@ -1,0 +1,40 @@
+name: Polyglot build experiment
+
+on:
+  push:
+    branches:
+      - experiment/polyglot
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+
+      - name: Build multilingual site
+        run: bundle exec jekyll build --trace
+        env:
+          JEKYLL_ENV: production
+
+      - name: Verify English and Chinese routes
+        run: |
+          test -f _site/ai-slops/harness/multi-agent/model-routing-by-agent-role/index.html
+          test -f _site/zh/ai-slops/harness/multi-agent/model-routing-by-agent-role/index.html
+
+      - name: Upload preview artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: polyglot-site-${{ github.sha }}
+          path: _site
+          retention-days: 7
