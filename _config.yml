@@ -4,6 +4,13 @@ description: Notes on AI systems, models, infra, research, and life.
 markdown: kramdown
 permalink: pretty
 
+giscus:
+  repo: SiNZeRo/SiNZeRo.github.io
+  repo_id: ""
+  category: Comments
+  category_id: ""
+  mapping: pathname
+
 kramdown:
   input: GFM
 
