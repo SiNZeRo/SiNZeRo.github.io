@@ -1,11 +1,14 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ page.lang | default: 'en' }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#6fb7a6">
   <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
   <meta name="description" content="{{ page.description | default: site.description | escape }}">
+  {% if page.translation_url and page.translation_lang %}
+  <link rel="alternate" hreflang="{{ page.translation_lang }}" href="{{ page.translation_url }}">
+  {% endif %}
   <link rel="icon" href="/favicon.png">
   <link rel="stylesheet" href="/assets/css/site.css">
   <link rel="stylesheet" href="/assets/css/archive.css">
