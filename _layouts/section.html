@@ -1,0 +1,43 @@
+---
+layout: default
+---
+<section class="page-head shell">
+  <p class="eyebrow">{{ page.eyebrow | default: "SECTION" }}</p>
+  <h1>{{ page.title }}</h1>
+  {% if page.description %}<p class="lede">{{ page.description }}</p>{% endif %}
+</section>
+
+<section class="shell section-body">
+  {{ content }}
+
+  {% assign children = site.pages | where: "parent", page.url | sort: "nav_order" %}
+  {% if children.size > 0 %}
+  <div class="section-label">SUBSECTIONS</div>
+  <div class="card-grid">
+    {% for child in children %}
+      <a class="section-card" href="{{ child.url }}">
+        <span class="card-kicker">{{ child.eyebrow | default: "NODE" }}</span>
+        <strong>{{ child.title }}</strong>
+        {% if child.description %}<span>{{ child.description }}</span>{% endif %}
+        <em>Open →</em>
+      </a>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% assign articles = site.pages | where: "article_parent", page.url | sort: "date" | reverse %}
+  {% if articles.size > 0 %}
+  <div class="section-label articles-label">ARTICLES</div>
+  <div class="article-list">
+    {% for article in articles %}
+      <a class="article-row" href="{{ article.url }}">
+        <span>
+          <strong>{{ article.title }}</strong>
+          {% if article.description %}<small>{{ article.description }}</small>{% endif %}
+        </span>
+        <time>{{ article.date | date: "%Y-%m-%d" }}</time>
+      </a>
+    {% endfor %}
+  </div>
+  {% endif %}
+</section>

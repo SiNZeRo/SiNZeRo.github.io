@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b5cff">
+  <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ page.description | default: site.description | escape }}">
+  <link rel="icon" href="/favicon.png">
+  <link rel="stylesheet" href="/assets/css/site.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell nav-shell">
+      <a class="brand" href="/">SiNZeRo<span class="brand-dot">.</span></a>
+      <nav class="top-nav" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/ai-slops/">AI Slops</a>
+        <a href="/myself/">Myself</a>
+        <a href="/legacy/">Legacy</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>{{ content }}</main>
+
+  <footer class="site-footer">
+    <div class="shell footer-row">
+      <span>SiNZeRo / notes in motion</span>
+      <a href="https://github.com/SiNZeRo">GitHub ↗</a>
+    </div>
+  </footer>
+</body>
+</html>

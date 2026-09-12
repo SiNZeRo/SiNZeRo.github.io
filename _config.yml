@@ -1,0 +1,12 @@
+title: SiNZeRo
+url: https://sinzero.github.io
+description: Notes on AI systems, models, infra, research, and life.
+markdown: kramdown
+permalink: pretty
+
+kramdown:
+  input: GFM
+
+exclude:
+  - README.md
+  - _drafts
