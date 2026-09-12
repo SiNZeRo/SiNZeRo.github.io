@@ -1,0 +1,16 @@
+.comments {
+  margin-top: 52px;
+  padding-top: 24px;
+  border-top: 1px solid #dddddd;
+}
+
+.comments h2 {
+  margin: 0 0 18px;
+  color: #3d8878;
+  font: 700 24px/1.2 Georgia, "Times New Roman", serif;
+}
+
+.giscus,
+.giscus-frame {
+  width: 100%;
+}
