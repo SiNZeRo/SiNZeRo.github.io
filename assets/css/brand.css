@@ -1,0 +1,26 @@
+.masthead-title {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .12em;
+}
+
+.masthead-main {
+  font-size: 1em;
+}
+
+.masthead-sep {
+  font-size: .72em;
+  opacity: .78;
+}
+
+.masthead-cn {
+  font-size: .58em;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+
+@media (max-width: 560px) {
+  .masthead-cn {
+    font-size: .62em;
+  }
+}
