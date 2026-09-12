@@ -1,0 +1,31 @@
+name: Blog comments to Discord
+
+on:
+  discussion_comment:
+    types: [created]
+
+permissions:
+  contents: read
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify Discord
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_COMMENTS_WEBHOOK }}
+          COMMENT_URL: ${{ github.event.comment.html_url }}
+          COMMENT_AUTHOR: ${{ github.event.comment.user.login }}
+          DISCUSSION_TITLE: ${{ github.event.discussion.title }}
+        run: |
+          if [ -z "$DISCORD_WEBHOOK" ]; then
+            echo "DISCORD_COMMENTS_WEBHOOK is not configured; skipping."
+            exit 0
+          fi
+          payload=$(jq -n \
+            --arg content "💬 New blog comment by ${COMMENT_AUTHOR}\n${DISCUSSION_TITLE}\n${COMMENT_URL}" \
+            '{content: $content}')
+          curl -fsS \
+            -H 'Content-Type: application/json' \
+            -d "$payload" \
+            "$DISCORD_WEBHOOK"
