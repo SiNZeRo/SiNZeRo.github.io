@@ -1,0 +1,30 @@
+<aside class="sidebar">
+  <section class="sidebar-section">
+    <h2>Recent Notes</h2>
+    {% assign recent_notes = site.pages | where: "layout", "post" | sort: "date" | reverse %}
+    <ul>
+      {% for note in recent_notes limit:8 %}
+        <li><a href="{{ note.url }}">{{ note.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section class="sidebar-section">
+    <h2>Sections</h2>
+    <ul>
+      <li><a href="/ai-slops/">AI Slops</a></li>
+      <li><a href="/ai-slops/harness/">Harness & Agents</a></li>
+      <li><a href="/ai-slops/models/">Models</a></li>
+      <li><a href="/ai-slops/infra/">Infra</a></li>
+      <li><a href="/myself/">Myself</a></li>
+    </ul>
+  </section>
+
+  <section class="sidebar-section">
+    <h2>Archive</h2>
+    <ul>
+      <li><a href="/blog/archives/">Legacy blog archive</a></li>
+      <li><a href="/legacy/">Legacy home</a></li>
+    </ul>
+  </section>
+</aside>
