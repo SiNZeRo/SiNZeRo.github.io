@@ -1,0 +1,15 @@
+.language-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-transform: none;
+}
+
+.language-switch .lang-current {
+  color: #3d8878;
+  font-weight: 700;
+}
+
+.language-switch a {
+  font-weight: 700;
+}
