@@ -4,9 +4,34 @@ description: Notes on AI systems, models, infra, research, and life.
 markdown: kramdown
 permalink: pretty
 
+plugins:
+  - jekyll-polyglot
+
+languages:
+  - en
+  - zh
+default_lang: en
+parallel_localization: true
+fallback_canonical_to_default_lang: true
+exclude_from_localization:
+  - assets
+  - images
+  - stylesheets
+  - js
+  - javascripts
+  - fonts
+  - blog
+  - legacy
+  - favicon.png
+  - favicon.png_
+  - robots.txt
+  - atom.xml
+  - sitemap.xml
+
 kramdown:
   input: GFM
 
 exclude:
   - README.md
   - _drafts
+  - vendor
