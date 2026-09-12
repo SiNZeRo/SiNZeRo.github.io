@@ -60,6 +60,16 @@
   color: inherit;
 }
 
+.ai-teaser-cover {
+  display: block;
+  width: calc(100% + 36px);
+  max-width: none;
+  margin: -18px -18px 16px;
+  border-bottom: 1px solid #dddddd;
+  object-fit: cover;
+  max-height: 260px;
+}
+
 .ai-teaser-meta {
   display: flex;
   justify-content: space-between;
@@ -92,6 +102,16 @@
   margin: 11px 0 0;
   color: #666;
   font: 14px/1.58 Georgia, "Times New Roman", serif;
+}
+
+.ai-teaser .ai-teaser-description {
+  color: #555;
+  font-weight: 700;
+}
+
+.ai-teaser .ai-teaser-excerpt {
+  color: #777;
+  font-size: 13px;
 }
 
 .ai-teaser-more {
