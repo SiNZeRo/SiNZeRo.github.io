@@ -1,0 +1,57 @@
+---
+layout: default
+---
+<div class="content-shell shell">
+  <div class="main-column">
+    <section class="page-head ai-index-head">
+      <p class="eyebrow">{{ page.eyebrow | default: "AI / INDEX" }}</p>
+      <h1>{{ page.title }}</h1>
+      {% if page.description %}<p class="lede">{{ page.description }}</p>{% endif %}
+    </section>
+
+    <section class="section-body ai-index-body">
+      {{ content }}
+
+      {% assign children = site.pages | where: "parent", page.url | sort: "nav_order" %}
+      {% if children.size > 0 %}
+      <div class="section-label">SECTIONS</div>
+      <div class="ai-section-links">
+        {% for child in children %}
+          <a href="{{ child.url }}">
+            <strong>{{ child.title }}</strong>
+            {% if child.description %}<span>{{ child.description }}</span>{% endif %}
+          </a>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <div class="section-label ai-feed-label">LATEST NOTES</div>
+      <div class="ai-masonry">
+        {% assign all_notes = site.pages | where: "layout", "post" | sort: "date" | reverse %}
+        {% for article in all_notes %}
+          {% if article.article_parent and article.article_parent contains '/ai-slops/' %}
+            {% unless article.hide_from_lists %}
+              <article class="ai-teaser">
+                <a class="ai-teaser-link" href="{{ article.url }}">
+                  <div class="ai-teaser-meta">
+                    {% if article.category %}<span>{{ article.category }}</span>{% endif %}
+                    {% if article.date %}<time>{{ article.date | date: "%Y-%m-%d" }}</time>{% endif %}
+                  </div>
+                  <h2>{{ article.title }}</h2>
+                  {% if article.description %}
+                    <p>{{ article.description }}</p>
+                  {% else %}
+                    <p>{{ article.content | markdownify | strip_html | strip_newlines | truncatewords: 42 }}</p>
+                  {% endif %}
+                  <span class="ai-teaser-more">Read →</span>
+                </a>
+              </article>
+            {% endunless %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </section>
+  </div>
+
+  {% include sidebar.html %}
+</div>
