@@ -19,7 +19,14 @@ layout: default
         {% endif %}
       </div>
     </header>
-    <div class="prose">{{ content }}</div>
+    {% assign table_hint = "Swipe horizontally to view all columns ↔" %}
+    {% assign table_label = "Data table; scroll horizontally to view all columns" %}
+    {% if page.lang == 'zh-CN' or page.lang == 'zh' %}
+      {% assign table_hint = "左右滑动查看完整表格 ↔" %}
+      {% assign table_label = "数据表格，可左右滑动查看全部列" %}
+    {% endif %}
+    {% capture table_open %}<div class="table-block"><p class="table-scroll-hint">{{ table_hint }}</p><div class="table-scroll" role="region" tabindex="0" aria-label="{{ table_label }}"><table{% endcapture %}
+    <div class="prose">{{ content | replace: '<table', table_open | replace: '</table>', '</table></div></div>' }}</div>
     {% include comments.html %}
   </article>
 

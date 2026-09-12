@@ -10,12 +10,13 @@
   <link rel="alternate" hreflang="{{ page.translation_lang }}" href="{{ page.translation_url }}">
   {% endif %}
   <link rel="icon" href="/favicon.png">
-  <link rel="stylesheet" href="/assets/css/site.css">
-  <link rel="stylesheet" href="/assets/css/archive.css">
-  <link rel="stylesheet" href="/assets/css/i18n.css">
-  <link rel="stylesheet" href="/assets/css/comments.css">
-  <link rel="stylesheet" href="/assets/css/brand.css">
-  <link rel="stylesheet" href="/assets/css/ai-feed.css">
+  {% assign asset_version = site.github.build_revision | default: 'mobile-20260912' %}
+  <link rel="stylesheet" href="/assets/css/site.css?v={{ asset_version }}">
+  <link rel="stylesheet" href="/assets/css/archive.css?v={{ asset_version }}">
+  <link rel="stylesheet" href="/assets/css/i18n.css?v={{ asset_version }}">
+  <link rel="stylesheet" href="/assets/css/comments.css?v={{ asset_version }}">
+  <link rel="stylesheet" href="/assets/css/brand.css?v={{ asset_version }}">
+  <link rel="stylesheet" href="/assets/css/ai-feed.css?v={{ asset_version }}">
 </head>
 <body>
   <header class="site-masthead">
