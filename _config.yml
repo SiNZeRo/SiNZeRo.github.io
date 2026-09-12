@@ -7,8 +7,8 @@ permalink: pretty
 giscus:
   repo: SiNZeRo/SiNZeRo.github.io
   repo_id: "MDEwOlJlcG9zaXRvcnkxMTU0MDk2Mg=="
-  category: Comments
-  category_id: ""
+  category: General
+  category_id: "DIC_kwDOALAZ4s4DFc7H"
   mapping: pathname
 
 kramdown:
