@@ -1,0 +1,22 @@
+.archive-list {
+  border-top: 0;
+}
+
+.archive-year {
+  margin: 34px 0 0;
+  padding: 0 0 9px;
+  border-bottom: 1px solid #e3e3e3;
+  color: #222222;
+  font: 700 24px/1.2 Georgia, "Times New Roman", serif;
+}
+
+.archive-year:first-child {
+  margin-top: 8px;
+}
+
+@media (max-width: 760px) {
+  .archive-year {
+    margin-top: 28px;
+    font-size: 22px;
+  }
+}
