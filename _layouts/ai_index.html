@@ -33,16 +33,14 @@ layout: default
             {% unless article.hide_from_lists %}
               <article class="ai-teaser">
                 <a class="ai-teaser-link" href="{{ article.url }}">
+                  {% if article.cover %}<img class="ai-teaser-cover" src="{{ article.cover }}" alt="">{% endif %}
                   <div class="ai-teaser-meta">
                     {% if article.category %}<span>{{ article.category }}</span>{% endif %}
                     {% if article.date %}<time>{{ article.date | date: "%Y-%m-%d" }}</time>{% endif %}
                   </div>
                   <h2>{{ article.title }}</h2>
-                  {% if article.description %}
-                    <p>{{ article.description }}</p>
-                  {% else %}
-                    <p>{{ article.content | markdownify | strip_html | strip_newlines | truncatewords: 42 }}</p>
-                  {% endif %}
+                  {% if article.description %}<p class="ai-teaser-description">{{ article.description }}</p>{% endif %}
+                  <p class="ai-teaser-excerpt">{{ article.content | markdownify | strip_html | strip_newlines | truncatewords: 52 }}</p>
                   <span class="ai-teaser-more">Read →</span>
                 </a>
               </article>
