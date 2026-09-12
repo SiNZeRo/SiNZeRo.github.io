@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#1863a1">
+  <meta name="theme-color" content="#6fb7a6">
   <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
   <meta name="description" content="{{ page.description | default: site.description | escape }}">
   <link rel="icon" href="/favicon.png">
@@ -11,24 +11,31 @@
   <link rel="stylesheet" href="/assets/css/archive.css">
 </head>
 <body>
-  <header class="site-header">
+  <header class="site-masthead">
+    <div class="shell masthead-inner">
+      <a class="masthead-title" href="/">简记·思行-SiNZeRo</a>
+      <div class="masthead-tagline">Sunshine and Imagination</div>
+    </div>
+  </header>
+
+  <nav class="site-nav" aria-label="Primary">
     <div class="shell nav-shell">
-      <a class="brand" href="/">SiNZeRo<span class="brand-dot">.</span></a>
-      <nav class="top-nav" aria-label="Primary">
+      <div class="top-nav">
         <a href="/">Home</a>
         <a href="/ai-slops/">AI Slops</a>
         <a href="/myself/">Myself</a>
         <a href="/legacy/">Legacy</a>
-      </nav>
+        <a href="https://github.com/SiNZeRo">GitHub</a>
+      </div>
     </div>
-  </header>
+  </nav>
 
   <main>{{ content }}</main>
 
   <footer class="site-footer">
     <div class="shell footer-row">
-      <span>SiNZeRo / notes in motion</span>
-      <a href="https://github.com/SiNZeRo">GitHub ↗</a>
+      <span>SiNZeRo · notes in motion</span>
+      <a href="/legacy/">Old site</a>
     </div>
   </footer>
 </body>
