@@ -6,12 +6,9 @@ date: 2026-09-12
 category: "HARNESS / MULTI-AGENT"
 article_parent: /ai-slops/harness/multi-agent/
 hide_from_lists: true
-lang: zh-CN
-lang_label: 中文
-translation_url: /ai-slops/harness/multi-agent/model-routing-by-agent-role/
-translation_lang: en
-translation_label: EN
-permalink: /ai-slops/harness/multi-agent/model-routing-by-agent-role/zh/
+lang: zh
+page_id: model-routing-by-agent-role
+permalink: /ai-slops/harness/multi-agent/model-routing-by-agent-role/
 ---
 
 可以，改成这三个维度更清楚：
