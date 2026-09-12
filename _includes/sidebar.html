@@ -3,8 +3,10 @@
     <h2>Recent Notes</h2>
     {% assign recent_notes = site.pages | where: "layout", "post" | sort: "date" | reverse %}
     <ul>
-      {% for note in recent_notes limit:8 %}
-        <li><a href="{{ note.url }}">{{ note.title }}</a></li>
+      {% for note in recent_notes limit:12 %}
+        {% unless note.hide_from_lists %}
+          <li><a href="{{ note.url }}">{{ note.title }}</a></li>
+        {% endunless %}
       {% endfor %}
     </ul>
   </section>
