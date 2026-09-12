@@ -1,15 +1,19 @@
 ---
 layout: default
 ---
-<article class="post shell">
-  <header class="post-head">
-    <p class="eyebrow">{{ page.category | default: "NOTE" }}</p>
-    <h1>{{ page.title }}</h1>
-    {% if page.description %}<p class="lede">{{ page.description }}</p>{% endif %}
-    <div class="post-meta">
-      {% if page.date %}<time>{{ page.date | date: "%Y-%m-%d" }}</time>{% endif %}
-      {% if page.article_parent %}<a href="{{ page.article_parent }}">Back to section ↑</a>{% endif %}
-    </div>
-  </header>
-  <div class="prose">{{ content }}</div>
-</article>
+<div class="content-shell shell">
+  <article class="post main-column">
+    <header class="post-head">
+      <p class="eyebrow">{{ page.category | default: "NOTE" }}</p>
+      <h1>{{ page.title }}</h1>
+      {% if page.description %}<p class="lede">{{ page.description }}</p>{% endif %}
+      <div class="post-meta">
+        {% if page.date %}<time>{{ page.date | date: "%b %d, %Y" }}</time>{% endif %}
+        {% if page.article_parent %}<a href="{{ page.article_parent }}">Back to section ↑</a>{% endif %}
+      </div>
+    </header>
+    <div class="prose">{{ content }}</div>
+  </article>
+
+  {% include sidebar.html %}
+</div>
