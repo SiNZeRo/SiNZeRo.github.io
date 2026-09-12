@@ -1,25 +1,31 @@
 ---
 layout: post
 title: "Multi-agent Model Routing by Role"
-description: "Controller, Worker, Reviewer, Explorer, Advisor 的模型分工与 cost/task 默认选择。"
+description: "Model allocation and cost/task defaults for Controller, Worker, Reviewer, Explorer, and Advisor roles."
 date: 2026-09-12
 category: "HARNESS / MULTI-AGENT"
 article_parent: /ai-slops/harness/multi-agent/
+lang: en
+lang_label: EN
+translation_url: /ai-slops/harness/multi-agent/model-routing-by-agent-role/zh/
+translation_lang: zh-CN
+translation_label: 中文
+permalink: /ai-slops/harness/multi-agent/model-routing-by-agent-role/
 ---
 
-可以，改成这三个维度更清楚：
+These three dimensions make the comparison clearer:
 
-| Role | 默认推荐 | 性价比备选（cost/task） | 优质备选 | 备注 |
+| Role | Default recommendation | Cost-efficient alternative (cost/task) | Quality alternative | Notes |
 | --- | --- | --- | --- | --- |
-| **Controller** | **Sol-medium** | Luna-max | **Astra-low** | 默认需要稳定判断；难任务升 Astra |
-| **Worker** | **Luna-max** | Luna-max | **Sol-medium** | bounded task 优先压低单任务成本 |
-| **Reviewer (weak)** | **Luna-max** | Luna-max | **Terra-xhigh** | weak reviewer 主要抓明显 bug |
-| **Explorer** | **Luna-max** | Luna-max | **Terra-xhigh** | 搜索/试探很吃 token，便宜最重要 |
-| **Advisor** | **Astra-low** | **Sol-medium** | Astra-low | advisor 调用少，单次判断价值高 |
+| **Controller** | **Sol-medium** | Luna-max | **Astra-low** | Stable judgment matters by default; escalate hard tasks to Astra. |
+| **Worker** | **Luna-max** | Luna-max | **Sol-medium** | For bounded tasks, optimize for lower cost per completed task. |
+| **Reviewer (weak)** | **Luna-max** | Luna-max | **Terra-xhigh** | A weak reviewer mainly needs to catch obvious bugs. |
+| **Explorer** | **Luna-max** | Luna-max | **Terra-xhigh** | Search and probing consume lots of tokens, so cheap throughput matters. |
+| **Advisor** | **Astra-low** | **Sol-medium** | Astra-low | Advisor calls are infrequent, so each judgment can justify more spend. |
 
-## 如果把「默认推荐」也按 cost/task 逻辑重新定义
+## If the default recommendation is redefined around cost/task
 
-| Role | 最佳性价比默认 | 极致省钱 | 追求质量 |
+| Role | Best-value default | Extreme savings | Quality-first |
 | --- | --- | --- | --- |
 | Controller | **Sol-medium** | Luna-max | **Astra-low** |
 | Worker | **Luna-max** | Luna-max | **Sol-medium** |
@@ -27,17 +33,17 @@ article_parent: /ai-slops/harness/multi-agent/
 | Explorer | **Luna-max** | Luna-max | **Terra-xhigh / Sol-medium** |
 | Advisor | **Sol-medium** | Sol-medium | **Astra-low** |
 
-这里我其实会稍微修正前面的结论：
+That slightly changes the earlier conclusion:
 
-- **Advisor 默认也可以用 Sol-medium**
-  - 从 `cost/task` 看更稳。
-  - 只有真正需要「最终裁决 / 架构判断 / 多方案取舍」时再上 Astra-low。
+- **Sol-medium can also be the default Advisor model.**
+  - It is more robust from a `cost/task` perspective.
+  - Escalate to Astra-low only for final arbitration, architecture decisions, or difficult multi-option trade-offs.
 - **Terra-xhigh**
-  - 最适合放在 **Reviewer / Explorer 的质量升级档**。
-  - 不太适合当全局默认。
+  - Fits best as a quality-upgrade tier for **Reviewer / Explorer**.
+  - It is less attractive as the global default.
 - **Luna-max**
-  - 在 Worker / Explorer / weak Reviewer 上几乎是天然默认。
+  - Is the natural default for Worker / Explorer / weak Reviewer roles.
 
 ## Takeaway
 
-> **Sol = 默认决策层，Luna = 默认执行层，Terra = 中档质量升级，Astra = 高价值裁决层。**
+> **Sol = default decision layer, Luna = default execution layer, Terra = mid-tier quality upgrade, Astra = high-value arbitration layer.**
